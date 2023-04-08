@@ -1,9 +1,6 @@
 name: Lint on Commit
 
-on:
-  push:
-    branches:
-      - main  # or specify the branch you want to trigger the workflow on
+on: [push, pull_request]
 
 jobs:
   lint:
@@ -26,4 +23,4 @@ jobs:
       run: pip install flake8
 
     - name: Run Linter
-      run: flake8 --ignore=E501 --recursive src/  # Replace with your linter command and specify the target directory, e.g., pylint src, mypy src, etc.
+      run: flake8 --ignore=E501 src  # Replace with your linter command and specify the target directory, e.g., pylint src, mypy src, etc.
