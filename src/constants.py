@@ -18,7 +18,7 @@ GIT_USERS = [
 #     {"git_username": "danamzulescu-codefresh", "git_pat": "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"}
 # ]
 
-GIT_PAT = "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"
+GIT_PAT = ""
 APERTURE_REPO_URL = "github.com/aperture-sci/trio-app"
 APERTURE_ORG = "aperture-sci"
 APERTURE_REPO_SHORT = "trio-app"
