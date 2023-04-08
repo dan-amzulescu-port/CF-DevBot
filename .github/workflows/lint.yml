@@ -22,5 +22,8 @@ jobs:
     - name: Install dependencies
       run: pip install -r src/requirements.txt  # Install dependencies from the src folder
 
+    - name: Install flake8
+      run: pip install flake8
+
     - name: Run Linter
       run: flake8 --ignore=E501 --recursive src/  # Replace with your linter command and specify the target directory, e.g., pylint src, mypy src, etc.
