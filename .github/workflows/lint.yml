@@ -1,0 +1,26 @@
+name: Lint on Commit
+
+on:
+  push:
+    branches:
+      - main  # or specify the branch you want to trigger the workflow on
+
+jobs:
+  lint:
+    name: Run Linter
+    runs-on: ubuntu-latest  # You can change the runner environment as needed
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # Checkout the repository code
+
+    - name: Set up Python
+      uses: actions/setup-python@v2  # Set up Python environment
+      with:
+        python-version: 3.11  # Specify Python version 3.11
+
+    - name: Install dependencies
+      run: pip install -r src/requirements.txt  # Install dependencies from the src folder
+
+    - name: Run Linter
+      run: flake8 --ignore=E501 --recursive src/  # Replace with your linter command and specify the target directory, e.g., pylint src, mypy src, etc.
