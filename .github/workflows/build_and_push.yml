@@ -81,6 +81,7 @@ jobs:
         git_tag="${{ github.ref }}"
         # Replace slashes with hyphens and remove "refs/tags/" prefix
         docker_image_tag="${git_tag/refs\/tags\//}"
+        # Replace slashes with underscores
         docker_image_tag="${docker_image_tag/\//-}"
         # Replace other special characters with hyphens
         docker_image_tag="${docker_image_tag//[^a-zA-Z0-9.-]/-}"
