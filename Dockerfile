@@ -12,6 +12,7 @@ WORKDIR /app/src
 
 # Install requirements from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pyupio
 
 # Add any additional commands or configurations here, if needed
 
