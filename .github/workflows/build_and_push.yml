@@ -58,18 +58,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Get the username and password from GitHub Secrets
+      run: |
+        # Get the username and password from GitHub Secrets
+        echo "quayIoUsername=${{ secrets.DEV_BOT_USER }}" >> $GITHUB_ENV
+        echo "quayIoPassword=${{ secrets.DEV_BOT_PASS }}" >> $GITHUB_ENV
+
     - name: Set up Docker
       run: |
         sudo apt-get update
         sudo apt-get install -y docker.io
         sudo systemctl start docker
         sudo systemctl enable docker
-
-    - name: Get the username and password from GitHub Secrets
-      run: |
-        # Get the username and password from GitHub Secrets
-        echo "quayIoUsername=${{ secrets.DEV_BOT_USER }}" >> $GITHUB_ENV
-        echo "quayIoPassword=${{ secrets.DEV_BOT_PASS }}" >> $GITHUB_ENV
 
       - name: Get Git tag and print
         run: |
