@@ -83,7 +83,7 @@ jobs:
         fi
         release_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "$(git rev-parse --short HEAD)")
         echo "Latest release tag = $release_tag"
-        echo "docker_image_tag=$release_tag" >> $GITHUB_ENV
+        echo "dockerImageTag=$release_tag" >> $GITHUB_ENV
 
     - name: Define the Docker image name
       run: |    
