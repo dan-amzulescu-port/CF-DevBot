@@ -91,11 +91,9 @@ jobs:
         echo "2"
 
         # Replace slashes with hyphens using tr command
-        docker_image_tag="${{ docker_image_tag//\//- }}"
+        docker_image_tag=$(echo "$docker_image_tag" | tr '/' '-')
         # Replace other special characters with hyphens
-        docker_image_tag="${{ docker_image_tag//[^a-zA-Z0-9.-]/- }}"
-        # Convert to lowercase
-        docker_image_tag="${{ docker_image_tag,, }}"
+        docker_image_tag=$(echo "$docker_image_tag" | tr -cd '[:alnum:].-' | tr '[:upper:]' '[:lower:]')
         echo "Docker image tag: $docker_image_tag"
         echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
 
