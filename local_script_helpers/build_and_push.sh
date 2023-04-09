@@ -19,7 +19,7 @@ docker login quay.io -u "$quayIoUsername" -p "$quayIoPassword"
 
 # Tag the Docker image with the quay.io repository
 quayIoRepository="quay.io/codefresh_sa/DevBot"
-docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"
+docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository/$dockerImageTag"
 
 # Push the Docker image to the quay.io container registry
 docker push "$quayIoRepository:$dockerImageTag"

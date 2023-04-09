@@ -75,6 +75,7 @@ jobs:
       run: |    
         # Define the Docker image name and tag
         dockerImageName="devbot"
+        # dockerImageTag="${{ github.ref }}"
         dockerImageTag="latest"
 
     - name: Build the Docker image
