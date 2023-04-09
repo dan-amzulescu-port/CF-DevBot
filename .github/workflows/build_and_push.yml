@@ -74,9 +74,10 @@ jobs:
     - name: Define the Docker image name and tag
       run: |    
         # Define the Docker image name and tag
-        # dockerImageTag="${{ github.ref }}"
         echo "dockerImageName=devbot" >> $GITHUB_ENV
-        echo "dockerImageTag=latest" >> $GITHUB_ENV
+        git_tag="${{ github.ref }}"
+        docker_image_tag="${git_tag/refs\/tags\//}"
+        echo "dockerImageTag=$docker_image_tag" >> $GITHUB_ENV
 
     - name: Build the Docker image
       run: |    
