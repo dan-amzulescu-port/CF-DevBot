@@ -86,7 +86,7 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: quay.io
-        username: {{ secrets.DEV_BOT_USER }}
+        username: ${{ secrets.DEV_BOT_USER }}
         password: ${{ secrets.DEV_BOT_PASS }}
 
     - name: Push to registry
