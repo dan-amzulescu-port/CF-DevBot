@@ -63,7 +63,7 @@ jobs:
         # Get the username and password from GitHub Secrets
         echo "quayIoUsername=${{ secrets.DEV_BOT_USER }}" >> $GITHUB_ENV
         echo "quayIoPassword=${{ secrets.DEV_BOT_PASS }}" >> $GITHUB_ENV
-        
+
     - name: Set up Docker
       run: |
         sudo apt-get update
@@ -71,7 +71,7 @@ jobs:
         sudo systemctl start docker
         sudo systemctl enable docker
 
-      - name: Get Git tag and print
+      - name: Get Git tag
         run: |
           git_tag="${{ github.ref }}"
           echo "Git tag: $git_tag"
