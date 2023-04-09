@@ -78,11 +78,12 @@ jobs:
 
     - name: Derive Docker image tag
       run: |
-        if [[ "${{ github.ref }}" == "refs/tags/"* ]]; then
-          # If git ref is a tag, set docker_image_tag to the tag name
-          docker_image_tag="${{ github.ref/refs\/tags\// }}"
+        latest_release_tag=$(curl -sSL https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.tag_name')
+        if [[ -n "$latest_release_tag" && "$latest_release_tag" != "null" ]]; then
+          # If latest release tag exists, set docker_image_tag to the tag name
+          docker_image_tag="$latest_release_tag"
         else
-          # If git ref is not a tag, set docker_image_tag to the commit hash
+          # If latest release tag does not exist, set docker_image_tag to the commit hash
           docker_image_tag="${{ github.sha }}"
         fi
 
@@ -90,12 +91,6 @@ jobs:
         docker_image_tag=$(echo "$docker_image_tag" | tr '/' '-')
         # Replace other special characters with hyphens
         docker_image_tag=$(echo "$docker_image_tag" | tr -cd '[:alnum:].-' | tr '[:upper:]' '[:lower:]')
-
-        # Set docker_image_tag to latest release tag if available
-        latest_release_tag=$(git describe --abbrev=0 --tags)
-        if [[ -n "$latest_release_tag" ]]; then
-          docker_image_tag="$latest_release_tag"
-        fi
 
         echo "Docker image tag: $docker_image_tag"
         echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
