@@ -81,6 +81,8 @@ jobs:
     - name: Build the Docker image
       run: |    
         # Build the Docker image
+        echo $dockerImageName
+        echo $dockerImageTag
         docker build -t "$dockerImageName:$dockerImageTag" .
 
     - name: Login to Quay.io
