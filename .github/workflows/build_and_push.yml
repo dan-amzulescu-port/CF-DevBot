@@ -7,6 +7,12 @@ on:
   workflow_dispatch:
     paths:
       - '.github/workflows/build_and_push.yml'
+  workflow_run:
+    workflows:
+      - 'Build and Push Docker Image'
+    types:
+      - opened
+      - synchronize
 
 jobs:
   lint:
