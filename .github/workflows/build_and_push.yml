@@ -102,7 +102,7 @@ jobs:
         # Tag the Docker image with the quay.io repository
         quayIoRepository=quay.io/codefresh_sa/devbot
         echo "quayIoRepository=quay.io/codefresh_sa/devbot" >> $GITHUB_ENV
-        docker tag "$dockerImageName:$docker_image_tag" "$quayIoRepository:docker_image_tag"
+        docker tag "$dockerImageName:$docker_image_tag" "$quayIoRepository:$docker_image_tag"
 
     - name: Push to registry
       run: |    
