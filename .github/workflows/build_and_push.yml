@@ -80,7 +80,7 @@ jobs:
       run: |
         if [[ "${{ github.ref }}" == "refs/tags/"* ]]; then
           # If git ref is a tag, set docker_image_tag to the tag name
-        docker_image_tag="${{ github.ref/refs\/tags\//}}"
+          docker_image_tag="${{ github.ref/refs\/tags\//}}"
         else
           # If git ref is not a tag, set docker_image_tag to the commit hash
           docker_image_tag="${{ github.sha }}"
