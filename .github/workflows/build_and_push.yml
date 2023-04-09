@@ -79,12 +79,28 @@ jobs:
     - name: Derive Docker image tag
       run: |
         git_tag="${{ github.ref }}"
+        echo "START"
+        echo "$git_tag"
+        echo "END"
+        
         # Replace slashes with hyphens and remove "refs/tags/" prefix
         docker_image_tag="${git_tag/refs\/tags\//}"
+        echo "START"
+        echo "$docker_image_tag"
+        echo "END"
+        
         # Replace slashes with underscores
         docker_image_tag="${docker_image_tag/\//-}"
+        echo "START"
+        echo "$docker_image_tag"
+        echo "END"
+        
         # Replace other special characters with hyphens
         docker_image_tag="${docker_image_tag//[^a-zA-Z0-9.-]/-}"
+        echo "START"
+        echo "$docker_image_tag"
+        echo "END"
+        
         # Convert to lowercase
         docker_image_tag="${docker_image_tag,,}"
         echo "Docker image tag: $docker_image_tag"
@@ -115,9 +131,6 @@ jobs:
     - name: Push to registry
       run: |    
         # Push the Docker image to the quay.io container registry
-        echo "START"
-        echo "$quayIoRepository:$docker_image_tag"
-        echo "END"
         docker push "$quayIoRepository:$dockerImageTag"
 
     - name: Clean Up
