@@ -62,32 +62,33 @@ jobs:
         sudo systemctl start docker
         sudo systemctl enable docker
 
-    - name: Build and Push Docker Image
+    - name: Get the username and password from GitHub Secrets
       run: |
         # Get the username and password from GitHub Secrets
         quayIoUsername="${{ secrets.DEV_BOT_USER }}"
         quayIoPassword="${{ secrets.DEV_BOT_PASS }}"
 
+    - name: Define the Docker image name and tag
+      run: |    
         # Define the Docker image name and tag
         dockerImageName="devbot"
         dockerImageTag="latest"
 
+    - name: Build the Docker image
+      run: |    
         # Build the Docker image
         docker build -t "$dockerImageName:$dockerImageTag" .
 
+    - name: Login to Quay.io
+      run: |    
         # Log in to the quay.io container registry using stdin for password
         echo "$quayIoPassword" | docker login quay.io -u "$quayIoUsername" --password-stdin
 
+    - name: Tag the Docker image with the quay.io repository
+      run: | 
         # Tag the Docker image with the quay.io repository
         quayIoRepository="quay.io/codefresh_sa/DevBot"
         docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"      
-
-    - name: Login to Quay.io
-      uses: docker/login-action@v2
-      with:
-        registry: quay.io
-        username: ${{ secrets.DEV_BOT_USER }}
-        password: ${{ secrets.DEV_BOT_PASS }}
 
     - name: Push to registry
       run: |    
