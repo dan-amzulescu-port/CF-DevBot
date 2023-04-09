@@ -90,6 +90,15 @@ jobs:
         docker_image_tag=$(echo "$docker_image_tag" | tr '/' '-')
         # Replace other special characters with hyphens
         docker_image_tag=$(echo "$docker_image_tag" | tr -cd '[:alnum:].-' | tr '[:upper:]' '[:lower:]')
+
+        # Set docker_image_tag to latest release tag if available
+        if [[ "${{ github.ref }}" == "refs/tags/"* ]]; then
+          latest_release_tag=$(git describe --abbrev=0 --tags)
+          if [[ -n "$latest_release_tag" ]]; then
+            docker_image_tag="$latest_release_tag"
+          fi
+        fi
+
         echo "Docker image tag: $docker_image_tag"
         echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
 
