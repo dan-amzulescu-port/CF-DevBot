@@ -11,7 +11,7 @@ venvPath="$currentDirectory/venv"
 cd "$venvPath"
 
 # Run pip freeze to generate requirements.txt
-pip freeze > ./requirements.txt
+pip freeze > ../src/requirements.txt
 
 # Change back to the original directory
 cd "$currentDirectory"

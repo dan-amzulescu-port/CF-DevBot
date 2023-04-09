@@ -1,4 +1,5 @@
-BUSLOG_COMMIT_MSGS = [
+# BUSLOG = SERVICE1
+SERVICE1_COMMIT_MSGS = [
     "Fix issue with buslog service failing to start on Kubernetes cluster",
     "Add error handling for buslog service API requests",
     "Update buslog service documentation with latest usage instructions",
@@ -20,7 +21,8 @@ BUSLOG_COMMIT_MSGS = [
     "Fix bug in buslog service's message validation logic",
 ]
 
-CTRLR_COMMIT_MSGS = [
+# CTRLR = SERVICE2
+SERVICE2_COMMIT_MSGS = [
     "Fix issue with ctrlr service failing to authenticate with external API",
     "Add error handling for ctrlr service API requests",
     "Update ctrlr service documentation with latest usage instructions",
@@ -42,8 +44,8 @@ CTRLR_COMMIT_MSGS = [
     "Fix bug in ctrlr service's validation logic",
 ]
 
-
-FLASKUI_COMMIT_MSGS = [
+# FLASKUI = SERVICE3
+SERVICE3_COMMIT_MSGS = [
     "Fix issue with flask-ui service failing to render template in Kubernetes cluster",
     "Add error handling for flask-ui service API requests",
     "Update flask-ui service documentation with latest usage instructions",
@@ -65,6 +67,28 @@ FLASKUI_COMMIT_MSGS = [
     "Fix bug in flask-ui service's form validation logic'"
 ]
 
+SERVICE_COMMIT_MSGS = [
+    "Fix bug in function xyz",
+    "Refactor code for improved readability",
+    "Add feature ABC",
+    "Update documentation",
+    "Optimize performance",
+    "Merge branch feature/123",
+    "Fix typo in file XYZ",
+    "Implement new functionality",
+    "Update dependencies",
+    "Add test cases",
+    "Fix formatting issues",
+    "Remove unused code",
+    "Fix security vulnerability",
+    "Update error handling",
+    "Revert previous commit",
+    "Add logging statements",
+    "Refactor variable naming",
+    "Update UI layout",
+    "Fix edge case in function ABC",
+    "Improve error messages"
+]
 
 CODE_LINES_LIST = ['from kubernetes import client, config',
                    'config.load_kube_config()',

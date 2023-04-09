@@ -7,8 +7,8 @@ if __name__ == '__main__':
         #     exit(-1)
         devbot = DevBotService()
         # devbot.run(sys.argv[1])
-        devbot.run("merge")
+        devbot.run("dev")
     except Exception as e:
-        print(e)
+        print("Error: ", e)
         exit(-1)
     exit(0)

@@ -1,0 +1,13 @@
+{
+  "JIRA_PROJECT": "AP",
+  "REPO_GIT_SERVER": "github.com",
+  "REPO_ORG": "aperture-sci",
+  "REPO_NAME": "trio-app",
+  "MIN_JIRA_TICKETS": 1,
+  "MAX_JIRA_TICKETS": 1,
+  "GIT_USERS_COUNT": 1,
+  "MIN_COMMITS": 1,
+  "MAX_COMMITS": 2,
+  "APP_SERVICES_COUNT": 3,
+  "APP_SERVICES_LIST": ["ctrlr", "flask-ui", "buslog"]
+}

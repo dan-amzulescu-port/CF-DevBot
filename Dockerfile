@@ -1,23 +1,17 @@
-# Use Python 3.11 base image
-FROM python:3.11
+# Use a slim image of Python 3.11 as the base image
+FROM python:3.11-slim
 
-# Set working directory
+# Set the working directory to /app
 WORKDIR /app
 
-# Install git
-RUN apt-get update && apt-get install -y git
+# Copy the contents of the src folder into the container
+COPY src /app/src
 
-# Clone the repository
-RUN git clone https://github.com/aperture-sci/devbot.git
+# Change directory to /app/src
+WORKDIR /app/src
 
-# Change to the cloned repository's directory
-WORKDIR /app/devbot
-
-# Install requirements
-RUN pip install -r src/requirements.txt
-
-# Set back to the working directory
-WORKDIR /app
+# Install requirements from requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Add any additional commands or configurations here, if needed
 
