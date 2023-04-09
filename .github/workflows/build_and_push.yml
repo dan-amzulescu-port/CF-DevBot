@@ -2,8 +2,11 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v*  # Specify the pattern for release tags, such as 'v*'
+  workflow_dispatch:
+    paths:
+      - '.github/workflows/build_and_push.yml'
 
 jobs:
   lint:
@@ -88,7 +91,7 @@ jobs:
       run: | 
         # Tag the Docker image with the quay.io repository
         quayIoRepository="quay.io/codefresh_sa/DevBot"
-        docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"      
+        docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository/$dockerImageTag"      
 
     - name: Push to registry
       run: |    

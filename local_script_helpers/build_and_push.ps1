@@ -1,3 +1,6 @@
+# Go one directory up
+Set-Location ..
+
 # Get the username and password from environment variables
 $quayIoUsername = $env:dev_bot_user
 $quayIoPassword = $env:dev_bot_pass

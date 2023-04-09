@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Go one directory up
+cd ..
+
 # Get the username and password from environment variables
 quayIoUsername="$dev_bot_user"
 quayIoPassword="$dev_bot_pass"

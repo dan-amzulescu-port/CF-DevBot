@@ -1,4 +1,8 @@
-# Update requirements.txt
+# Update requirements.txt & run lint
+
+# Go one directory up
+Set-Location ..
+
 # Get the current working directory
 $currentDirectory = Get-Location
 

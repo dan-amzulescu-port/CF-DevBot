@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Update requirements.txt
+
+# Go one directory up
+cd ..
+
 # Get the current working directory
 currentDirectory=$(pwd)
 
