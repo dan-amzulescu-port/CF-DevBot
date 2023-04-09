@@ -8,7 +8,7 @@ quayIoUsername="$dev_bot_user"
 quayIoPassword="$dev_bot_pass"
 
 # Define the Docker image name and tag
-dockerImageName="my-docker-image"
+dockerImageName="devbot
 dockerImageTag="latest"
 
 # Build the Docker image
