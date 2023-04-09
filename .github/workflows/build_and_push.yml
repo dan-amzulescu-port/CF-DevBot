@@ -77,10 +77,10 @@ jobs:
         echo "Git tag: $git_tag"
 
     - name: Fetch latest release tag
-        run: |
-          latest_release=$(git describe --abbrev=0 --tags)
-          echo "Latest release tag: $latest_release"
-          echo "docker_image_tag=$latest_release" >> $GITHUB_ENV
+      run: |
+        latest_release=$(git describe --abbrev=0 --tags)
+        echo "Latest release tag: $latest_release"
+        echo "docker_image_tag=$latest_release" >> $GITHUB_ENV
 
     - name: Define the Docker image name
       run: |    
