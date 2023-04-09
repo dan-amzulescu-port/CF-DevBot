@@ -78,24 +78,24 @@ jobs:
 
     - name: Derive Docker image tag
       run: |
-        if [[ "${github.ref}" == "refs/tags/"* ]]; then
+        if [[ "${{ github.ref }}" == "refs/tags/"* ]]; then
           # If git ref is a tag, set docker_image_tag to the tag name
-          docker_image_tag="${github.ref/refs\/tags\//}}"
+          docker_image_tag="${{ github.ref/refs\/tags\//}}"
         else
           # If git ref is not a tag, set docker_image_tag to the commit hash
-          docker_image_tag="${github.sha}"
+          docker_image_tag="${{ github.sha }}"
         fi
 
         echo "1"
         echo "$docker_image_tag"
         echo "2"
 
-        # Replace slashes with hyphens
-        docker_image_tag="${docker_image_tag/\//-}"
+        # Replace slashes with hyphens using tr command
+        docker_image_tag="${{ docker_image_tag//\//- }}"
         # Replace other special characters with hyphens
-        docker_image_tag="${docker_image_tag//[^a-zA-Z0-9.-]/-}"
+        docker_image_tag="${{ docker_image_tag//[^a-zA-Z0-9.-]/- }}"
         # Convert to lowercase
-        docker_image_tag="${docker_image_tag,,}"
+        docker_image_tag="${{ docker_image_tag,, }}"
         echo "Docker image tag: $docker_image_tag"
         echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
 
