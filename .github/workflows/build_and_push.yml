@@ -75,8 +75,8 @@ jobs:
         # Build the Docker image
         docker build -t "$dockerImageName:$dockerImageTag" .
 
-        # Log in to the quay.io container registry
-        docker login quay.io -u "$quayIoUsername" -p "$quayIoPassword"
+        # Log in to the quay.io container registry using stdin for password
+        echo "$quayIoPassword" | docker login quay.io -u "$quayIoUsername" --password-stdin
 
         # Tag the Docker image with the quay.io repository
         quayIoRepository="quay.io/codefresh_sa/DevBot"
