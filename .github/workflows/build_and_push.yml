@@ -71,18 +71,18 @@ jobs:
         sudo systemctl start docker
         sudo systemctl enable docker
 
-      - name: Get Git tag
-        run: |
-          git_tag="${{ github.ref }}"
-          echo "Git tag: $git_tag"
+    - name: Get Git tag
+      run: |
+        git_tag="${{ github.ref }}"
+        echo "Git tag: $git_tag"
 
-      - name: Derive Docker image tag
-        run: |
-          git_tag="${{ github.ref }}"
-          docker_image_tag="${git_tag/refs\/tags\//}"
-          docker_image_tag="${docker_image_tag/\//-}"
-          echo "Docker image tag: $docker_image_tag"
-          echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
+    - name: Derive Docker image tag
+      run: |
+        git_tag="${{ github.ref }}"
+        docker_image_tag="${git_tag/refs\/tags\//}"
+        docker_image_tag="${docker_image_tag/\//-}"
+        echo "Docker image tag: $docker_image_tag"
+        echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
 
     - name: Define the Docker image name
       run: |    
