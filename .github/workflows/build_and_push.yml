@@ -98,9 +98,6 @@ jobs:
     - name: Build the Docker image
       run: |    
         # Build the Docker image
-        echo "START"
-        echo "$dockerImageName:$docker_image_tag"
-        echo "END"
         docker build -t "$dockerImageName:$docker_image_tag" .
 
     - name: Login to Quay.io
@@ -118,6 +115,9 @@ jobs:
     - name: Push to registry
       run: |    
         # Push the Docker image to the quay.io container registry
+        echo "START"
+        echo "$dockerImageName:$docker_image_tag"
+        echo "END"
         docker push "$quayIoRepository:$dockerImageTag"
 
     - name: Clean Up
