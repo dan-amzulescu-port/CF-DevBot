@@ -68,15 +68,15 @@ jobs:
     - name: Get the username and password from GitHub Secrets
       run: |
         # Get the username and password from GitHub Secrets
-        quayIoUsername="${{ secrets.DEV_BOT_USER }}"
-        quayIoPassword="${{ secrets.DEV_BOT_PASS }}"
+        echo "quayIoUsername=${{ secrets.DEV_BOT_USER }}" >> $GITHUB_ENV
+        echo "quayIoPassword=${{ secrets.DEV_BOT_PASS }}" >> $GITHUB_ENV
 
     - name: Define the Docker image name and tag
       run: |    
         # Define the Docker image name and tag
-        dockerImageName="devbot"
         # dockerImageTag="${{ github.ref }}"
-        dockerImageTag="latest"
+        echo "dockerImageName=devbot" >> $GITHUB_ENV
+        echo "dockerImageTag=latest" >> $GITHUB_ENV
 
     - name: Print image name and tag
       run: |
