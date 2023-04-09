@@ -80,10 +80,21 @@ jobs:
 
         # Tag the Docker image with the quay.io repository
         quayIoRepository="quay.io/codefresh_sa/DevBot"
-        docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"
+        docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"      
 
+    - name: Login to Quay.io
+      uses: docker/login-action@v1
+      with:
+        registry: quay.io
+        username: {{ secrets.DEV_BOT_USER }}
+        password: ${{ secrets.DEV_BOT_PASS }}
+
+    - name: Push to registry
+        run: |    
         # Push the Docker image to the quay.io container registry
         docker push "$quayIoRepository:$dockerImageTag"
 
+    - name: Clean Up
+      run: |
         # Clean up: remove the local Docker image
         docker rmi "$dockerImageName:$dockerImageTag"
