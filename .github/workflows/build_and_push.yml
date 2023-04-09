@@ -90,7 +90,7 @@ jobs:
         password: ${{ secrets.DEV_BOT_PASS }}
 
     - name: Push to registry
-        run: |    
+      run: |    
         # Push the Docker image to the quay.io container registry
         docker push "$quayIoRepository:$dockerImageTag"
 
