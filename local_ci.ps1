@@ -9,7 +9,7 @@ $venvPath = Join-Path -Path $currentDirectory -ChildPath "venv"
 Set-Location -Path $venvPath
 
 # Run pip freeze to generate requirements.txt
-pip freeze > .\requirements.txt
+pip freeze > ..\src\requirements.txt
 
 # Change back to the original directory
 Set-Location -Path $currentDirectory
