@@ -116,7 +116,7 @@ jobs:
       run: |    
         # Push the Docker image to the quay.io container registry
         echo "START"
-        echo "$dockerImageName:$docker_image_tag"
+        echo "$quayIoRepository:$docker_image_tag"
         echo "END"
         docker push "$quayIoRepository:$dockerImageTag"
 
