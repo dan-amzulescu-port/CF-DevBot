@@ -81,8 +81,10 @@ jobs:
     - name: Print image name and tag
       run: |
         # Print image name and tag
+        echo "START"
         echo $dockerImageName
         echo $dockerImageTag
+        echo "END"
 
     - name: Build the Docker image
       run: |    
