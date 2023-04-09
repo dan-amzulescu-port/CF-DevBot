@@ -76,11 +76,13 @@ jobs:
         git_tag="${{ github.event.ref }}"
         echo "Git tag: $git_tag"
 
-    - name: Fetch latest release tag
-      run: |
-        release_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --max-count=1))
-        echo "Latest release tag: $release_tag"
-        echo "docker_image_tag=$release_tag" >> $GITHUB_ENV
+    - name: Get latest release tag
+        run: |
+        if git rev-parse --is-shallow-repository; then
+          git fetch --unshallow
+        fi
+        release_tag=$(git describe --abbrev=0 --tags $(git rev-list --tags --max-count=1) 2>/dev/null || echo "$(git rev-parse --short HEAD)")
+        echo "Latest release tag = $release_tag"
 
     - name: Define the Docker image name
       run: |    
