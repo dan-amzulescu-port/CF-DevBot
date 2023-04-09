@@ -71,17 +71,18 @@ jobs:
         echo "quayIoUsername=${{ secrets.DEV_BOT_USER }}" >> $GITHUB_ENV
         echo "quayIoPassword=${{ secrets.DEV_BOT_PASS }}" >> $GITHUB_ENV
 
-    - name: Get Git tag
-      run: |
-        git_tag="${{ github.ref }}"
-        echo "Git tag: $git_tag"
+      - name: Get Git tag
+        run: |
+          git_tag="${{ github.ref }}"
+          echo "Git tag: $git_tag"
 
-    - name: Derive Docker image tag
-      run: |
-        git_tag="${{ github.ref }}"
-        docker_image_tag="${git_tag/refs\/tags\//}"
-        docker_image_tag="${docker_image_tag/\//-}"
-        echo "Docker image tag: $docker_image_tag"
+      - name: Derive Docker image tag
+        run: |
+          git_tag="${{ github.ref }}"
+          docker_image_tag="${git_tag/refs\/tags\//}"
+          docker_image_tag="${docker_image_tag/\//-}"
+          echo "Docker image tag: $docker_image_tag"
+          echo "docker_image_tag=$docker_image_tag" >> $GITHUB_ENV
 
     - name: Define the Docker image name
       run: |    
@@ -91,7 +92,7 @@ jobs:
     - name: Build the Docker image
       run: |    
         # Build the Docker image
-        docker build -t "$dockerImageName:$dockerImageTag" .
+        docker build -t "$dockerImageName:$docker_image_tag" .
 
     - name: Login to Quay.io
       run: |    
@@ -103,7 +104,7 @@ jobs:
         # Tag the Docker image with the quay.io repository
         quayIoRepository=quay.io/codefresh_sa/devbot
         echo "quayIoRepository=quay.io/codefresh_sa/devbot" >> $GITHUB_ENV
-        docker tag "$dockerImageName:$dockerImageTag" "$quayIoRepository:$dockerImageTag"
+        docker tag "$dockerImageName:$docker_image_tag" "$quayIoRepository:docker_image_tag"
 
     - name: Push to registry
       run: |    
