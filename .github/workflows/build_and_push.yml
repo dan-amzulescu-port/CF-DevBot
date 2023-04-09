@@ -78,11 +78,15 @@ jobs:
         # dockerImageTag="${{ github.ref }}"
         dockerImageTag="latest"
 
+    - name: Print image name and tag
+      run: |
+        # Print image name and tag
+        echo $dockerImageName
+        echo $dockerImageTag
+
     - name: Build the Docker image
       run: |    
         # Build the Docker image
-        echo $dockerImageName
-        echo $dockerImageTag
         docker build -t "$dockerImageName:$dockerImageTag" .
 
     - name: Login to Quay.io
