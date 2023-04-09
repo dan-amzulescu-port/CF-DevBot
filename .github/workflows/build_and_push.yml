@@ -77,7 +77,7 @@ jobs:
         echo "Git tag: $git_tag"
 
     - name: Get latest release tag
-        run: |
+      run: |
         if git rev-parse --is-shallow-repository; then
           git fetch --unshallow
         fi
