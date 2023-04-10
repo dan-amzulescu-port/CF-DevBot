@@ -37,5 +37,7 @@ class DataVarService:
             raise ValueError(f"No App Data Json file found: value given={self._json_data_file}")
         # Iterate through the keys in the JSON data
         for key in data.keys():
-            # Set each key as an environment variable with the same name as the key
-            os.environ[key] = str(data[key])
+            # This enables override of json file using environment variables
+            if key not in os.environ or not os.environ[key]:
+                # Set each key as an environment variable with the same name as the key
+                os.environ[key] = str(data[key])
