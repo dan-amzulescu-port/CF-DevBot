@@ -2,10 +2,11 @@ import json
 import os
 import random
 import requests
+import logging
 
 from typing import Dict, List
 
-from git import Repo
+from git import Repo, GitConfigParser
 
 from blob_constants import (
     SERVICE1_COMMIT_MSGS,
@@ -20,19 +21,37 @@ from blob_constants import (
 from model.git_data import GitData
 from services.data_var_svc import get_random_app_service_name_and_id
 
+logging.basicConfig(level=logging.DEBUG)  # Set logging level to DEBUG
+logger = logging.getLogger(__name__)  # Create a logger for the current module
+
 
 class GitService:
     def __init__(self):
         self._git_data = GitData()
+        self._username = ""
+        self._password = ""
         self._set_gituser_cred()
         self._original_dir = os.getcwd()
-        self._repo = None
+        self._repo = Repo()
         self._original_head = None
+
+    def _validate_git_config(self):
+        config = self._repo.config_reader()
+        # Check if username and user email are already configured
+        if not config.has_option('user', 'name'):
+            config.set_value('user', 'name', 'Dev Bot')
+            logging.info('Set Git username.')
+        if not config.has_option('user', 'email'):
+            config.set_value('user', 'email', 'devbot@devbots.io')
+            logging.info('Set Git user email.')
+        # Write the changes to the Git config
+        config.write()
+        logging.info('Git config updated.')
 
     def _set_gituser_cred(self):
         main_git_user_id = str(random.randint(1, self._git_data.git_users_count))
-        os.environ['GIT_USERNAME'] = os.environ[f"GIT_USER{main_git_user_id}"]
-        os.environ['GIT_PASSWORD'] = os.environ[f"GIT_PAT{main_git_user_id}"]
+        self._username = os.environ[f"GIT_USER{main_git_user_id}"]
+        self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
 
     def produce_pull_request(self, jira_tickets: List[str]):
         number_of_commits = random.randint(int(os.environ['MIN_COMMITS']), int(os.environ['MAX_COMMITS']))
@@ -57,6 +76,7 @@ class GitService:
         os.chdir(f"{self._original_dir}{os.sep}repo")
         remote = f"https://{self._git_data.repo_url_short}"
         self._repo = Repo.clone_from(remote, os.getcwd())
+        self._validate_git_config()
 
     def _create_branch(self):
         new_branch_name = f"{random.choice(BRANCHES_NAMES_PREFIXES)}{random.choice(BRANCHES_NAMES)}"
@@ -72,7 +92,8 @@ class GitService:
             commit_msg = GitService.create_commit_msg(jira_ticket_ref, app_service_id)
             self._repo.git.add(A=True)
             self._repo.git.commit(m=commit_msg)
-            self._repo.git.push('--set-upstream', 'origin', self._repo.head)
+            self._repo.git.push('--set-upstream', 'origin', self._repo.head,
+                                username=self._username, password=self._password)
 
         except Exception as e:
             print(e)
@@ -103,7 +124,7 @@ class GitService:
 
     def _create_pull_request(self, title, description, source_branch, target_branch):
         """Creates the pull request for the head_branch against the base_branch"""
-        headers = {"Accept": "application/vnd.github.v3+json", "Authorization": f"Bearer {os.environ['GIT_PASSWORD']}"}
+        headers = {"Accept": "application/vnd.github.v3+json", "Authorization": f"Bearer {self._password}"}
         payload = self._create_pr_payload(description, source_branch, target_branch, title)
         r = requests.post(self._git_data.git_pulls_api, headers=headers, data=json.dumps(payload))
 
@@ -120,7 +141,7 @@ class GitService:
         return payload
 
     def merge_prs(self):
-        git_token = os.environ['GIT_PASSWORD']
+        git_token = self._password
         pulls = self.get_pull_requests(git_token)
 
         if len(pulls) > 4:
