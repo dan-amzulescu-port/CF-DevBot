@@ -6,7 +6,7 @@ import logging
 
 from typing import Dict, List
 
-from git import Repo, GitConfigParser
+from git import Repo
 
 from blob_constants import (
     SERVICE1_COMMIT_MSGS,
