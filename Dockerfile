@@ -10,6 +10,9 @@ COPY src /app/src
 # Change directory to /app/src
 WORKDIR /app/src
 
+# Install Git and Bash using apk package manager
+RUN apk update && apk add --no-cache git bash
+
 # Install requirements from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade pyupio
@@ -17,4 +20,3 @@ RUN pip install --upgrade pyupio
 # Add any additional commands or configurations here, if needed
 
 # Start your application or perform other actions as desired
-
