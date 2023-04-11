@@ -33,6 +33,7 @@ jobs:
 
   build-and-push:
     runs-on: ubuntu-latest
+    needs: lint
 
     steps:
     - name: Update package lists and upgrade packages
