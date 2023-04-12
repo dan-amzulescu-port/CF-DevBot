@@ -2,11 +2,10 @@ import json
 import os
 import random
 import requests
+import subprocess
 import logging
 
 from typing import Dict, List
-
-from git import Repo
 
 from blob_constants import (
     SERVICE1_COMMIT_MSGS,
@@ -18,45 +17,35 @@ from blob_constants import (
     PULL_REQUESTS_TITLES,
     SERVICE_COMMIT_MSGS,
 )
+from helpers.git_functions import validate_git_config_is_set, get_github_headers, get_repo_data
+from helpers.logging_functions import handle_error, handle_success
 from model.git_data import GitData
 from services.data_var_svc import get_random_app_service_name_and_id
 
-logging.basicConfig(level=logging.DEBUG)  # Set logging level to DEBUG
+logging.basicConfig(level=logging.INFO)  # Set logging level to DEBUG
 logger = logging.getLogger(__name__)  # Create a logger for the current module
 
 
 class GitService:
     def __init__(self):
+        validate_git_config_is_set()
         self._git_data = GitData()
         self._username = ""
         self._password = ""
         self._set_gituser_cred()
         self._original_dir = os.getcwd()
-        self._repo = Repo()
+        # self._repo = Repo()
         self._original_head = None
 
-    def _validate_git_config(self):
-        config = self._repo.config_reader()
-        # Check if username and user email are already configured
-        if not config.has_option('user', 'name'):
-            config.set_value('user', 'name', 'Dev Bot')
-            logging.info('Set Git username.')
-        if not config.has_option('user', 'email'):
-            config.set_value('user', 'email', 'devbot@devbots.io')
-            logging.info('Set Git user email.')
-        # Write the changes to the Git config
-        config.write()
-        logging.info('Git config updated.')
-
-    def _set_gituser_cred(self):
+    def _set_gituser_cred(self) -> None:
         main_git_user_id = str(random.randint(1, self._git_data.git_users_count))
         self._username = os.environ[f"GIT_USER{main_git_user_id}"]
         self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
 
-    def produce_pull_request(self, jira_tickets: List[str]):
+    def produce_pull_request(self, jira_tickets: List[str]) -> None:
         number_of_commits = random.randint(int(os.environ['MIN_COMMITS']), int(os.environ['MAX_COMMITS']))
         self._clone_repo()
-        self._create_branch()
+        new_branch_name = self._create_branch()
         app_service, app_service_id = get_random_app_service_name_and_id()
         for i in range(0, len(jira_tickets)):
             self._create_commit(app_service, app_service_id, jira_tickets[i])
@@ -66,23 +55,45 @@ class GitService:
         self._create_pull_request(
             f"{random.choice(PULL_REQUESTS_TITLES)}",  # title
             f"General fixes/changes + taking care of the following tickets: {' '.join(jira_tickets)}",
-            self._repo.head.reference.name,  # head_branch
-            "main"
+            get_repo_data(url=self._git_data.repo_url_short, token=self._password, data_key="default_branch"),  # head
+            new_branch_name  # base
         )
 
-    def _clone_repo(self):
+    def _clone_repo(self) -> None:
         os.chdir(self._original_dir)
         os.mkdir("repo")
         os.chdir(f"{self._original_dir}{os.sep}repo")
-        remote = f"https://{self._git_data.repo_url_short}"
-        self._repo = Repo.clone_from(remote, os.getcwd())
-        self._validate_git_config()
+
+        extra_headers = f"Authorization: Bearer {self._password}"
+        clone_command = f'git clone {self._git_data.repo_url_short}.git . -c http.extraHeader={extra_headers}'
+        result = subprocess.run(clone_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode == 0:
+            handle_success(f'Repository {self._git_data.repo_url_short} cloned successfully.')
+        else:
+            handle_error(f'Failed to clone repository. Error: {result.stderr.decode("utf-8")}')
 
     def _create_branch(self):
         new_branch_name = f"{random.choice(BRANCHES_NAMES_PREFIXES)}{random.choice(BRANCHES_NAMES)}"
-        current = self._repo.create_head(new_branch_name)
-        current.checkout()
-        self._repo.git.push('--set-upstream', 'origin', self._repo.head)
+
+        GitService._create_local_branch(new_branch_name)
+        self._git_push()
+        return new_branch_name
+
+    def _git_push(self) -> None:
+        push_result = subprocess.run(['git', 'push', '-u',
+                                      f'https://{self._username}:{self._password}@{self._git_data.repo_url_short}git'])
+        if push_result.returncode != 0:
+            handle_error(f'Error pushing changes: {push_result.stderr.decode("utf-8")}')
+        else:
+            handle_success("Successfully pushed changes")
+
+    @staticmethod
+    def _create_local_branch(new_branch_name: str) -> None:
+        create_branch_result = subprocess.run(['git', 'checkout', '-b', new_branch_name])
+        if create_branch_result.returncode != 0:
+            handle_error(f'Error creating branch: {create_branch_result.stderr.decode("utf-8")}')
+        else:
+            handle_success(f"Successfully created branch locally :{new_branch_name}")
 
     def _create_commit(self, app_service: str, app_service_id: int, jira_ticket_ref: str = "", ) -> None:
         self._set_gituser_cred()
@@ -90,10 +101,9 @@ class GitService:
         try:
             self._create_code_change(app_service)
             commit_msg = GitService.create_commit_msg(jira_ticket_ref, app_service_id)
-            self._repo.git.add(A=True)
-            self._repo.git.commit(m=commit_msg)
-            self._repo.git.push('--set-upstream', 'origin', self._repo.head,
-                                username=self._username, password=self._password)
+            subprocess.run(['git', 'add', '.'])
+            subprocess.run(['git', 'commit', '-m', commit_msg, f'--author={self._username} <{self._password}>'])
+            self._git_push()
 
         except Exception as e:
             print(e)
@@ -158,16 +168,14 @@ class GitService:
 
     def get_pull_requests(self, git_token: str):
         pulls_url = f"{self._git_data.git_pulls_api}?state=open"
-        headers = {"Accept": "application/vnd.github.v3+json", "Authorization": f"Bearer {git_token}"}
-        response = requests.get(pulls_url, headers=headers)
+        response = requests.get(pulls_url, headers=get_github_headers(git_token))
         pulls = response.json()
         return pulls
 
     def _merge_pull_request(self, pull, git_token):
-        headers = {"Accept": "application/vnd.github.v3+json", "Authorization": f"Bearer {git_token}"}
         pull_num = pull["number"]
         merge_url = f"{self._git_data.git_pulls_api}/{pull_num}/merge"
-        response = requests.put(merge_url, headers=headers)
+        response = requests.put(merge_url, headers=get_github_headers(git_token))
 
         if response.status_code == 200:
             print(f"Pull Request #{pull_num} merged successfully.")

@@ -13,6 +13,10 @@ WORKDIR /app/src
 # Install Git and Bash using apk package manager
 RUN apk update && apk add --no-cache git bash
 
+# Set Git user name and user email
+RUN git config --global user.name "DevBot"
+RUN git config --global user.email "Dev@Bot.ai"
+
 # Install requirements from requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --upgrade pyupio
