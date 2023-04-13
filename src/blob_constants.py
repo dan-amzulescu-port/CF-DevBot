@@ -174,7 +174,7 @@ BRANCHES_NAMES = [
     "Monitoring-refine",
     "Blue-green-deploy",
     "GitOps-adoption",
-    "CI/CD-pipeline-opt",
+    "CICD-pipeline-opt",
     "Deployment-refactor",
     "Performance-refactor",
     "Error-handling-ref",

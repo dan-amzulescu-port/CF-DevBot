@@ -1,5 +1,6 @@
 import subprocess
 from typing import Dict
+from bs4 import BeautifulSoup
 
 import requests
 
@@ -30,14 +31,17 @@ def get_github_headers(token: str) -> Dict:
     }
 
 
-def get_repo_data(url: str, token: str, data_key: str) -> str:
+def get_default_branch(url: str, token: str) -> str:
     headers = get_github_headers(token)
     response = requests.get(url, headers=headers)
 
     # Check if the response was successful
     if response.status_code == 200:
         handle_success(f"Repo {url} info was retrieved successfully")
-        repo_info = response.json()
-        return repo_info[data_key]
+        # Parse the HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+        if not soup.find('span', {'class': 'css-truncate-target'}).text:
+            handle_error("not able to determine repo default branch - html parser could not find it")
+        return soup.find('span', {'class': 'css-truncate-target'}).text
     else:
-        handle_error(f"Repo {url} info was not retrieved successfully: HTTP {response.status_code}")
+        handle_error(f"default branch for {url} was not retrieved successfully: HTTP {response.status_code}")
