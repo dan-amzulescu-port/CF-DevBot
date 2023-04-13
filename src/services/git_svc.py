@@ -84,7 +84,7 @@ class GitService:
 
     def _git_push(self, branch: str) -> None:
         command = f"git push https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git {branch}"
-        push_result = subprocess.run(command)
+        push_result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         handle_subprocess_output(push_result, "<Pushing Git Changes>")
 
     @staticmethod
