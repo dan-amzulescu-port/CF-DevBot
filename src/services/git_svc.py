@@ -42,7 +42,7 @@ class GitService:
         self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
         subprocess.run(['git', 'config', '--global', 'user.name', self._username])
         subprocess.run(['git', 'config', '--global', 'user.password', self._password])
-        print(f"User set {self._username}")
+        print(f"Git User set: {self._username}")
 
     def produce_pull_request(self, jira_tickets: List[str]) -> None:
         number_of_commits = random.randint(int(os.environ['MIN_COMMITS']), int(os.environ['MAX_COMMITS']))
@@ -77,13 +77,16 @@ class GitService:
         os.chdir(f"{self._original_dir}{os.sep}repo")
 
     def _create_branch(self) -> str:
-        new_branch_name = f"{random.choice(BRANCHES_NAMES_PREFIXES)}{random.choice(BRANCHES_NAMES)}"
+        new_branch_name = f"{random.choice(BRANCHES_NAMES_PREFIXES)}" \
+                          f"{random.choice(BRANCHES_NAMES)}_" \
+                          f"{random.randint(1,1000000)}"
 
         GitService._create_local_branch(new_branch_name)
         self._git_push(new_branch_name)
         return new_branch_name
 
     def _git_push(self, branch: str) -> None:
+        self._set_gituser_cred()
         command = f"git push https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git {branch}"
         push_result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         handle_subprocess_output(push_result, "<Pushing Git Changes>")
