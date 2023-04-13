@@ -42,6 +42,7 @@ class GitService:
         self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
         subprocess.run(['git', 'config', '--global', 'user.name', self._username])
         subprocess.run(['git', 'config', '--global', 'user.password', self._password])
+        print(f"User set {self._username}")
 
     def produce_pull_request(self, jira_tickets: List[str]) -> None:
         number_of_commits = random.randint(int(os.environ['MIN_COMMITS']), int(os.environ['MAX_COMMITS']))
