@@ -25,7 +25,6 @@ from services.data_var_svc import get_random_app_service_name_and_id
 
 class GitService:
     def __init__(self, log_level: int = logging.INFO):
-        validate_git_config_is_set()
         self._configure_logger(log_level)
         self._git_data = GitData()
         self._username = ""
@@ -33,6 +32,7 @@ class GitService:
         self._set_gituser_cred()
         self._original_dir = os.getcwd()
         self._original_head = None
+        validate_git_config_is_set(self._logger)
 
     def _configure_logger(self, log_level) -> None:
         logging.basicConfig(
@@ -72,8 +72,9 @@ class GitService:
         self._create_pull_request(
             f"{random.choice(PULL_REQUESTS_TITLES)}",  # title
             f"General fixes/changes + taking care of the following tickets: {' '.join(jira_tickets)}",
-            get_default_branch(url=f"https://{self._git_data.repo_url_short}", token=self._password),
-            new_branch_name  # base
+            get_default_branch(url=f"https://{self._git_data.repo_url_short}",
+                               token=self._password, logger=self._logger),
+            new_branch_name  # basecd ol
         )
 
     def _clone_repo(self) -> None:
