@@ -2,18 +2,14 @@ import logging
 # Set up logging
 from subprocess import CompletedProcess
 
-logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-
-def handle_error(error_message: str) -> None:
-    print(error_message)
+def handle_error(error_message: str, logger: logging.Logger) -> None:
     logging.error(error_message)
     raise Exception(error_message)
 
 
-def handle_success(message: str) -> None:
-    print(message)
-    logging.info(message)
+def handle_success(message: str, logger: logging.Logger) -> None:
+    logger.info(message)
 
 
 def handle_subprocess_output(output: CompletedProcess, task: str) -> None:
