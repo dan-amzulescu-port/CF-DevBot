@@ -74,7 +74,7 @@ class GitService:
             f"General fixes/changes + taking care of the following tickets: {' '.join(jira_tickets)}",
             get_default_branch(url=f"https://{self._git_data.repo_url_short}",
                                token=self._password, logger=self._logger),
-            new_branch_name  # basecd ol
+            new_branch_name
         )
 
     def _clone_repo(self) -> None:
