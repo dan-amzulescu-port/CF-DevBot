@@ -6,7 +6,7 @@ from helpers.logging_functions import handle_error
 from services.dev_bot_svc import DevBotService
 
 log_level = logging.DEBUG
-logging.basicConfig(log_level)  # Set logging level to DEBUG
+logging.basicConfig(level=log_level)  # Set logging level to DEBUG
 logger = logging.getLogger(__name__)  # Create a logger for the current module
 
 if __name__ == '__main__':
