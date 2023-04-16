@@ -6,7 +6,6 @@ from services.jira_svc import JiraService
 class DevBotService:
     def __init__(self):
         self._data_service = DataVarService()
-        self._jira_bot = JiraService()
         self._git_bot = GitService()
 
     def run(self, task: str):
@@ -19,7 +18,8 @@ class DevBotService:
                 raise ValueError('Invalid option was set (only "dev" and "merge" currently supported): ' + task)
 
     def _dev_run(self):
-        tickets_created_list = self._jira_bot.create_jira_tickets()
+        jira_bot = JiraService()
+        tickets_created_list = jira_bot.create_jira_tickets()
         self._git_bot.produce_pull_request(tickets_created_list)
 
     def _merge_run(self):
