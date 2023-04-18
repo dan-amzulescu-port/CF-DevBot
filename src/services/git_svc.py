@@ -201,7 +201,7 @@ class GitService:
         pull_num = pull["number"]
         merge_url = f"{self._git_data.git_pulls_api}/{pull_num}/merge"
         payload = {'commit_title': f'Merged PR: {pull["body"]}'}
-        response = requests.put(merge_url, headers=get_github_headers(git_token), payload=payload)
+        response = requests.put(merge_url, headers=get_github_headers(git_token), json=payload)
 
         if response.status_code == 200:
             print(f"Pull Request #{pull_num} merged successfully.")
