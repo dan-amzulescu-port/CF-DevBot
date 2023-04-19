@@ -4,3 +4,5 @@ DEVBOT_TASKS = ['dev', 'merge']
 GH_API_BASE_URL = "https://api.github.com"
 JSON_DATA_FILE = "devbot_params.json"
 SECRETS_FILE = "secrets.env"
+
+JIRA_USER_ROLES = ["Administrator", "Viewer", "Member"]
