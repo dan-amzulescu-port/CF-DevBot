@@ -17,6 +17,8 @@ from blob_constants import (
     PULL_REQUESTS_TITLES,
     SERVICE_COMMIT_MSGS,
 )
+from constants import MAX_GITHUB_PAGES
+from helpers.generic_functions import timestamp
 from helpers.git_functions import validate_git_config_is_set, get_github_headers, get_default_branch
 from helpers.logging_functions import handle_error, handle_success, handle_subprocess_output
 from model.git_data import GitData
@@ -77,6 +79,24 @@ class GitService:
             new_branch_name
         )
 
+    def clean_changes(self):
+        self._clone_repo()
+
+        for app_service in os.environ['APP_SERVICES_LIST']:
+            path = f"{self._original_dir}{os.sep}repo{os.sep}{app_service}{os.sep}changes"
+            if os.path.exists(path):
+                try:
+                    os.rmdir(path)
+                    handle_success(f"Folder {path} successfully deleted.", self._logger)
+                except OSError as e:
+                    handle_error(f"Error deleting folder {path}: {e}", self._logger)
+        new_branch_name = f"cleanup_{timestamp()}"
+        self._create_local_branch(new_branch_name)
+        self._git_push(new_branch_name)
+        self._create_pull_request("cleanup", "cleanup",
+                                  get_default_branch(url=f"https://{self._git_data.repo_url_short}",
+                                                     token=self._password, logger=self._logger), new_branch_name)
+
     def _clone_repo(self) -> None:
         self._cd_to_repo_dir()
 
@@ -133,7 +153,12 @@ class GitService:
         if app_service:
             app_folder = f"{os.sep}{app_service}"
 
-        with open(f"{self._original_dir}{os.sep}repo{app_folder}{os.sep}changes.py", 'a') as file:
+        new_file_location = f"{self._original_dir}{os.sep}repo{app_folder}{os.sep}changes"
+
+        if not os.path.exists(new_file_location):
+            os.makedirs(new_file_location)
+
+        with open(f"{new_file_location}{os.sep}changes_file_{timestamp()}.py", 'a') as file:
             file.write(f'{random.choice(PYTHON_COMMANDS)}\n')
 
     @staticmethod
@@ -193,17 +218,48 @@ class GitService:
 
     def get_pull_requests(self, git_token: str):
         pulls_url = f"{self._git_data.git_pulls_api}?state=open"
-        response = requests.get(pulls_url, headers=get_github_headers(git_token))
-        pulls = response.json()
+
+        page_num = 1
+        pulls = []
+
+        while page_num <= MAX_GITHUB_PAGES:
+            response = requests.get(pulls_url,
+                                    params={"per_page": 100, "page": page_num},
+                                    headers=get_github_headers(git_token))
+            if response.status_code == 200:
+                page_pull_requests = response.json()
+                pulls += page_pull_requests
+                if len(page_pull_requests) == 0 or len(page_pull_requests) < 100:
+                    break
+                else:
+                    page_num += 1
+
         return pulls
 
     def _merge_pull_request(self, pull, git_token):
         pull_num = pull["number"]
         merge_url = f"{self._git_data.git_pulls_api}/{pull_num}/merge"
-        payload = {'commit_title': f'Merged PR: {pull["body"]}'}
+        payload = {'commit_title': f'Merged PR: {pull["body"]}', 'merge_method': 'squash'}
         response = requests.put(merge_url, headers=get_github_headers(git_token), json=payload)
 
         if response.status_code == 200:
             print(f"Pull Request #{pull_num} merged successfully.")
         else:
             print(f"Failed to merge Pull Request #{pull_num}. Status code: {response.status_code}")
+
+    def close_prs(self):
+        git_token = self._password
+        pulls = self.get_pull_requests(git_token)
+
+        for i in range(len(pulls)):
+            print(f"Pull Request #{pulls[i]['number']} - '{pulls[i]['title']}' will be closed.")
+            self._close_pull_request(pulls[i], git_token)
+
+    def _close_pull_request(self, pull, git_token):
+        pull_num = pull["number"]
+        url = f"{self._git_data.git_pulls_api}/{pull_num}"
+
+        close_payload = {"state": "closed"}
+        close_pr_response = requests.patch(url, json=close_payload, headers=get_github_headers(git_token))
+        if close_pr_response.status_code != 200:
+            print(f"Failed to close Pull request #{pull_num}")

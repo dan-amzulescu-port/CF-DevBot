@@ -12,8 +12,12 @@ class DevBotService:
         match task:
             case "dev":
                 self._dev_run()
-            case "merge":
+            case "merge_prs":
                 self._merge_run()
+            case "close_prs":
+                self._close_run()
+            case "clean_changes":
+                self._clean_changes_run()
             case _:
                 raise ValueError('Invalid option was set (only "dev" and "merge" currently supported): ' + task)
 
@@ -24,3 +28,9 @@ class DevBotService:
 
     def _merge_run(self):
         self._git_bot.merge_prs()
+
+    def _close_run(self):
+        self._git_bot.close_prs()
+
+    def _clean_changes_run(self):
+        self._git_bot.clean_changes()
