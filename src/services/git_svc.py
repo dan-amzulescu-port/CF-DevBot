@@ -56,7 +56,7 @@ class GitService:
         main_git_user_id = str(random.randint(1, self._git_data.git_users_count))
         self._username = os.environ[f"GIT_USER{main_git_user_id}"]
         self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
-        self._password = os.environ[f"GIT_EMAIL{main_git_user_id}"]
+        self._email = os.environ[f"GIT_EMAIL{main_git_user_id}"]
         # TODO: Add validations for the subprocess.run below
         subprocess.run(['git', 'config', '--global', 'user.name', self._username])
         subprocess.run(['git', 'config', '--global', 'user.password', self._password])
