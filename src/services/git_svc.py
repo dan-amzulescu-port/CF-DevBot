@@ -56,9 +56,11 @@ class GitService:
         main_git_user_id = str(random.randint(1, self._git_data.git_users_count))
         self._username = os.environ[f"GIT_USER{main_git_user_id}"]
         self._password = os.environ[f"GIT_PAT{main_git_user_id}"]
+        self._password = os.environ[f"GIT_EMAIL{main_git_user_id}"]
         # TODO: Add validations for the subprocess.run below
         subprocess.run(['git', 'config', '--global', 'user.name', self._username])
         subprocess.run(['git', 'config', '--global', 'user.password', self._password])
+        subprocess.run(['git', 'config', '--global', 'user.email', self._email])
         self._logger.debug(f"Git User set: {self._username}")
 
     def produce_pull_request(self, jira_tickets: List[str]) -> None:
