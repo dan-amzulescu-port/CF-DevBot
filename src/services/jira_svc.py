@@ -49,7 +49,7 @@ class JiraService:
                     if role_response.status_code == 200:
                         for actor in role_response.json()['actors']:
                             if actor['type'] == 'atlassian-user-role-actor':
-                                user_list.append(actor['displayName'])
+                                user_list.append(actor['actorUser']["accountId"])
                                 self._logger.info(f"{actor['displayName']} was added to Jira Project users")
                     else:
                         self._logger.error(f"Failed to fetch actors for role {role_name}. "
