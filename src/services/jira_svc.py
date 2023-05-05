@@ -77,7 +77,7 @@ class JiraService:
             'issuetype': {'name': issuetype},
         }
         if len(self._jira_users) > 0:
-            issue_dict.update({'assignee': {'name': assignee}})
+            issue_dict.update({'assignee': {'accountId': assignee}})
         try:
             return str(self._jira_client.create_issue(fields=issue_dict))
         except Exception as e:
