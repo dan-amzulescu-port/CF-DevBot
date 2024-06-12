@@ -14,7 +14,7 @@ steps:
   run:
     title: Run DevBot dev function
     type: "freestyle"
-    image: aperturesci/devbot:${{DEVBOT_TAG}}
+    image: aperturesci/${{IMAGE}}:${{DEVBOT_TAG}}
     working_directory: "/app/src"
     environment:
       - GIT_USER1=${{GIT_USER1}}
