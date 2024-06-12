@@ -1,0 +1,25 @@
+version: '1.0'
+
+# hooks:
+#   on_fail:
+#     steps:
+#       exec:
+#         type: slack-post-channel:0.0.7
+#         arguments:
+#           SLACK_TOKEN: ${{LR_SLACK_TOKEN}}
+#           SLACK_CHANNEL: topic-codefresh-demo
+#           SLACK_MESSAGE: "${{CF_PIPELINE_NAME}} failed. See ${{CF_BUILD_URL}}"
+
+steps:
+  run:
+    title: Run DevBot dev function
+    type: "freestyle"
+    image: quay.io/codefresh_sa/devbot:v0.0.8
+    working_directory: "/app/src"
+    environment:
+      - GIT_USER1=${{GIT_USER1}}
+      - GIT_PAT1=${{GIT_PAT1}}
+      - GIT_USERS_COUNT=1
+    commands:
+      - python main.py clean_changes
+    timeout: 5m
