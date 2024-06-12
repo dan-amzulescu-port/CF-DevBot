@@ -1,4 +1,5 @@
 import datetime
+import ast
 import os
 import random
 import requests
@@ -81,17 +82,57 @@ class GitService:
             new_branch_name
         )
 
-    def clean_changes(self):
-        self._clone_repo()
+    def _delete_old_files(self, cutoff_time, directory) -> None:
+        self._logger.debug(f"Cleaning folder : {directory}")
 
-        for app_service in os.environ['APP_SERVICES_LIST']:
-            path = f"{self._original_dir}{os.sep}repo{os.sep}{app_service}{os.sep}changes"
+        # Iterate over files in the directory
+        for filename in os.listdir(directory):
+            filepath = os.path.join(directory, filename)
+
+            # Check if it's a file and if it's older than 90 days
+            if os.path.isfile(filepath):
+                log_command = f'git log -1 --format="%ai" {filepath}'
+                self._logger.debug(f"{filepath} : {log_command}")
+                result = subprocess.run(log_command, shell=True, capture_output=True)
+                if result.returncode != 0:
+                    handle_error(f'Failed to get file log for {filepath}. Error: {result.stderr.decode("utf-8")}', self._logger)
+
+                file_mtime = result.stdout.decode('utf-8').rstrip()
+                self._logger.debug(f"{filepath} :stdout {result.stdout}")
+                self._logger.debug(f"{filepath} :mtime {file_mtime}")
+                self._logger.debug(f"{filepath} : {file_mtime} < {cutoff_time}")
+                if file_mtime < cutoff_time:
+                    # If older than 90 days, delete the file
+                    # Cutoff time : 2024-05-11 13:48:35.528702
+                    # self._logger.debug(f"{filepath} : {file_mtime} < {cutoff_time}")
+                    os.remove(filepath)
+                    handle_success(f"Deleted {filepath}", self._logger)
+
+    def clean_changes(self):
+        self._logger.debug(f"Cleaning changes older than : {self._git_data.git_clean_cutoff}")
+        self._clone_repo()
+        self._logger.debug(f"Repo cloned")
+
+        # Get current time
+        current_time = datetime.datetime.now()
+
+        # Calculate the cutoff time (X days ago)
+        cutoff_time = current_time - datetime.timedelta(days=self._git_data.git_clean_cutoff)
+        cutoff_string=cutoff_time.strftime("%Y-%m-%d %H:%M:%S")
+        self._logger.debug(f"Cutoff time : {cutoff_string}")
+
+
+        for app_service in ast.literal_eval(os.environ['APP_SERVICES_LIST']):
+            #path = f"{self._original_dir}{os.sep}repo{os.sep}{app_service}{os.sep}changes"
+            path = f"{app_service}{os.sep}changes"
             if os.path.exists(path):
                 try:
-                    os.rmdir(path)
-                    handle_success(f"Folder {path} successfully deleted.", self._logger)
+                    self._delete_old_files(cutoff_string, path)
+                    handle_success(f"Folder {path} successfully cleaned.", self._logger)
                 except OSError as e:
-                    handle_error(f"Error deleting folder {path}: {e}", self._logger)
+                    handle_error(f"Error cleaning folder {path}: {e}", self._logger)
+            else:
+                handle_error(f"{path} folder does not exist and cannot be cleaned", self._logger)
         new_branch_name = f"cleanup_{timestamp()}"
         self._create_local_branch(new_branch_name)
         self._git_push(new_branch_name)
@@ -102,7 +143,7 @@ class GitService:
     def _clone_repo(self) -> None:
         self._cd_to_repo_dir()
 
-        clone_command = f'git clone https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git .'
+        clone_command = f'git clone --depth 1 https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git .'
         result = subprocess.run(clone_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             handle_success(f'Repository {self._git_data.repo_url_short} cloned successfully.', self._logger)

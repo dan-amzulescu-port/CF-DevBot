@@ -6,6 +6,7 @@ from constants import GH_API_BASE_URL
 class GitData:
     def __init__(self):
         self.git_users_count = int(os.getenv('GIT_USERS_COUNT'))
+        self.git_clean_cutoff=int(os.getenv('GIT_CLEAN_CUTOFF'))
         self.repo_git_server = os.getenv('REPO_GIT_SERVER')
         self.repo_org = os.getenv('REPO_ORG')
         self.repo_name = os.getenv('REPO_NAME')
