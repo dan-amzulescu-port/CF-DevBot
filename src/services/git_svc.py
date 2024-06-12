@@ -143,7 +143,7 @@ class GitService:
     def _clone_repo(self) -> None:
         self._cd_to_repo_dir()
 
-        clone_command = f'git clone --depth 1 https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git .'
+        clone_command = f'git clone https://{self._username}:{self._password}@{self._git_data.repo_url_short}.git .'
         result = subprocess.run(clone_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         if result.returncode == 0:
             handle_success(f'Repository {self._git_data.repo_url_short} cloned successfully.', self._logger)
