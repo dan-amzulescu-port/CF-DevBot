@@ -2,25 +2,29 @@ import json
 
 
 def process_dependabot():
-    with open('dependabot/dependabot-output.json') as f:
+    with open('dependabot/dependabot-output.json', 'r') as f:
         data = json.load(f)
 
-    vulnerabilities = []
+    # Print out the data to see its structure
+    print("Raw Data:", data)
+
+    # Assuming data is a list of alerts
+    alerts = []
+
     for alert in data:
-        vulnerabilities.append({
+        print("Processing Alert:", alert)  # Debug print
+        alerts.append({
             "identifier": alert['id'],
-            "title": alert['title'],
-            "description": alert['description'],
-            "severity": alert['severity'],
-            "package": alert['package'],
-            "version": alert['version'],
-            "fixed_version": alert['fixed_version'],
-            "repo": alert['repo'],
-            "pr": alert['pr']
+            "title": alert['security_advisory']['summary'],
+            "severity": alert['security_advisory']['severity'],
+            "ecosystem": alert['security_advisory']['ecosystem'],
+            "package": alert['security_advisory']['package'],
+            "fixed_in": alert['security_advisory']['fixed_in'],
+            "repository": alert['repository']['full_name']
         })
 
-    with open('dependabot/processed_data.json', 'w') as f:
-        json.dump(vulnerabilities, f)
+    with open('dependabot/processed-dependabot.json', 'w') as f:
+        json.dump(alerts, f, indent=2)
 
 
 if __name__ == "__main__":

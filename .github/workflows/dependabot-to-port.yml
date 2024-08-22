@@ -16,7 +16,10 @@ jobs:
           mkdir -p dependabot
           curl -L 'https://api.github.com/repos/${{ github.repository }}/dependabot/alerts' \
           -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
-          -o dependabot/dependabot-output.json
+          -o dependabot/dependabot-output.json        
+
+          echo "Dependabot data fetched:"
+          cat dependabot/dependabot-output.json
 
       - name: Set up Python
         uses: actions/setup-python@v4
