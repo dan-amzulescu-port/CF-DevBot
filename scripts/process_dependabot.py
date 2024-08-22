@@ -8,7 +8,7 @@ PORT_API_KEY = os.getenv('PORT_API_KEY')
 def upload_to_port(entity):
     url = "https://api.getport.io/v1/blueprints/dependabot/entities"
     headers = {
-        "Authorization": f"Bearer {PORT_API_KEY}",
+        "Authorization": f"{PORT_API_KEY}",
         "Content-Type": "application/json"
     }
     response = requests.post(url, headers=headers, json=entity)
