@@ -1,0 +1,1346 @@
+[
+  {
+    "number": 13,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "setuptools"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-cx63-2mw6-8hw5",
+      "cve_id": "CVE-2024-6345",
+      "summary": "setuptools vulnerable to Command Injection via package URL",
+      "description": "A vulnerability in the `package_index` module of pypa/setuptools versions up to 69.1.1 allows for remote code execution via its download functions. These functions, which are used to download packages from URLs provided by users or retrieved from package index servers, are susceptible to code injection. If these functions are exposed to user-controlled inputs, such as package URLs, they can execute arbitrary commands on the system. The issue is fixed in version 70.0.",
+      "severity": "high",
+      "identifiers": [
+        {
+          "value": "GHSA-cx63-2mw6-8hw5",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-6345",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-6345"
+        },
+        {
+          "url": "https://github.com/pypa/setuptools/commit/88807c7062788254f654ea8c03427adc859321f0"
+        },
+        {
+          "url": "https://huntr.com/bounties/d6362117-ad57-4e83-951f-b8141c6e7ca5"
+        },
+        {
+          "url": "https://github.com/pypa/setuptools/pull/4332"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-cx63-2mw6-8hw5"
+        }
+      ],
+      "published_at": "2024-07-15T03:30:57Z",
+      "updated_at": "2024-08-04T05:03:40Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "setuptools"
+          },
+          "severity": "high",
+          "vulnerable_version_range": "< 70.0.0",
+          "first_patched_version": {
+            "identifier": "70.0.0"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 8.8
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-94",
+          "name": "Improper Control of Generation of Code ('Code Injection')"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "setuptools"
+      },
+      "severity": "high",
+      "vulnerable_version_range": "< 70.0.0",
+      "first_patched_version": {
+        "identifier": "70.0.0"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/13",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/13",
+    "created_at": "2024-08-22T18:16:56Z",
+    "updated_at": "2024-08-22T18:16:56Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 12,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "certifi"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-248v-346w-9cwc",
+      "cve_id": "CVE-2024-39689",
+      "summary": "Certifi removes GLOBALTRUST root certificate",
+      "description": "Certifi 2024.07.04 removes root certificates from \"GLOBALTRUST\" from the root store. These are in the process of being removed from Mozilla's trust store.\n\nGLOBALTRUST's root certificates are being removed pursuant to an investigation which identified \"long-running and unresolved compliance issues\". Conclusions of Mozilla's investigation can be found [here]( https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI).",
+      "severity": "low",
+      "identifiers": [
+        {
+          "value": "GHSA-248v-346w-9cwc",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-39689",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-248v-346w-9cwc"
+        },
+        {
+          "url": "https://github.com/certifi/python-certifi/commit/bd8153872e9c6fc98f4023df9c2deaffea2fa463"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-39689"
+        },
+        {
+          "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/XpknYMPO8dI"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-248v-346w-9cwc"
+        }
+      ],
+      "published_at": "2024-07-05T20:06:40Z",
+      "updated_at": "2024-07-08T15:38:32Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "certifi"
+          },
+          "severity": "low",
+          "vulnerable_version_range": ">= 2021.05.30, < 2024.07.04",
+          "first_patched_version": {
+            "identifier": "2024.07.04"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": null,
+        "score": 0.0
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-345",
+          "name": "Insufficient Verification of Data Authenticity"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "certifi"
+      },
+      "severity": "low",
+      "vulnerable_version_range": ">= 2021.05.30, < 2024.07.04",
+      "first_patched_version": {
+        "identifier": "2024.07.04"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/12",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/12",
+    "created_at": "2024-08-22T18:16:56Z",
+    "updated_at": "2024-08-22T18:16:56Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 11,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-34jh-p97f-mpxf",
+      "cve_id": "CVE-2024-37891",
+      "summary": "urllib3's Proxy-Authorization request header isn't stripped during cross-origin redirects ",
+      "description": "When using urllib3's proxy support with `ProxyManager`, the `Proxy-Authorization` header is only sent to the configured proxy, as expected.\n\nHowever, when sending HTTP requests *without* using urllib3's proxy support, it's possible to accidentally configure the `Proxy-Authorization` header even though it won't have any effect as the request is not using a forwarding proxy or a tunneling proxy. In those cases, urllib3 doesn't treat the `Proxy-Authorization` HTTP header as one carrying authentication material and thus doesn't strip the header on cross-origin redirects.\n\nBecause this is a highly unlikely scenario, we believe the severity of this vulnerability is low for almost all users. Out of an abundance of caution urllib3 will automatically strip the `Proxy-Authorization` header during cross-origin redirects to avoid the small chance that users are doing this on accident.\n\nUsers should use urllib3's proxy support or disable automatic redirects to achieve safe processing of the `Proxy-Authorization` header, but we still decided to strip the header by default in order to further protect users who aren't using the correct approach.\n\n## Affected usages\n\nWe believe the number of usages affected by this advisory is low. It requires all of the following to be true to be exploited:\n\n* Setting the `Proxy-Authorization` header without using urllib3's built-in proxy support.\n* Not disabling HTTP redirects.\n* Either not using an HTTPS origin server or for the proxy or target origin to redirect to a malicious origin.\n\n## Remediation\n\n* Using the `Proxy-Authorization` header with urllib3's `ProxyManager`.\n* Disabling HTTP redirects using `redirects=False` when sending requests.\n* Not using the `Proxy-Authorization` header.",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-34jh-p97f-mpxf",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-37891",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-34jh-p97f-mpxf"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-37891"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/40b6d1605814dd1db0a46e202d6e56f2e4c9a468"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/accff72ecc2f6cf5a76d9570198a93ac7c90270e"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-34jh-p97f-mpxf"
+        }
+      ],
+      "published_at": "2024-06-17T21:37:20Z",
+      "updated_at": "2024-06-17T21:37:23Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "< 1.26.19",
+          "first_patched_version": {
+            "identifier": "1.26.19"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": ">= 2.0.0, < 2.2.2",
+          "first_patched_version": {
+            "identifier": "2.2.2"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:H/I:N/A:N",
+        "score": 4.4
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-669",
+          "name": "Incorrect Resource Transfer Between Spheres"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "< 1.26.19",
+      "first_patched_version": {
+        "identifier": "1.26.19"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/11",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/11",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 10,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "requests"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-9wx4-h78v-vm56",
+      "cve_id": "CVE-2024-35195",
+      "summary": "Requests `Session` object does not verify requests after making first request with verify=False",
+      "description": "When making requests through a Requests `Session`, if the first request is made with `verify=False` to disable cert verification, all subsequent requests to the same origin will continue to ignore cert verification regardless of changes to the value of `verify`. This behavior will continue for the lifecycle of the connection in the connection pool.\n\n### Remediation\nAny of these options can be used to remediate the current issue, we highly recommend upgrading as the preferred mitigation.\n\n* Upgrade to `requests>=2.32.0`.\n* For `requests<2.32.0`, avoid setting `verify=False` for the first request to a host while using a Requests Session.\n* For `requests<2.32.0`, call `close()` on `Session` objects to clear existing connections if `verify=False` is used.\n\n### Related Links\n* https://github.com/psf/requests/pull/6655",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-9wx4-h78v-vm56",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-35195",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/psf/requests/security/advisories/GHSA-9wx4-h78v-vm56"
+        },
+        {
+          "url": "https://github.com/psf/requests/pull/6655"
+        },
+        {
+          "url": "https://github.com/psf/requests/commit/a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-35195"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/IYLSNK5TL46Q6XPRVMHVWS63MVJQOK4Q"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/N7WP6EYDSUOCOJYHDK5NX43PYZ4SNHGZ"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-9wx4-h78v-vm56"
+        }
+      ],
+      "published_at": "2024-05-20T20:15:00Z",
+      "updated_at": "2024-06-10T18:31:04Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "requests"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "< 2.32.0",
+          "first_patched_version": {
+            "identifier": "2.32.0"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:H/PR:H/UI:R/S:U/C:H/I:H/A:N",
+        "score": 5.6
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-670",
+          "name": "Always-Incorrect Control Flow Implementation"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "requests"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "< 2.32.0",
+      "first_patched_version": {
+        "identifier": "2.32.0"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/10",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/10",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 9,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "idna"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-jjg7-2v4v-x38h",
+      "cve_id": "CVE-2024-3651",
+      "summary": "Internationalized Domain Names in Applications (IDNA) vulnerable to denial of service from specially crafted inputs to idna.encode",
+      "description": "### Impact\nA specially crafted argument to the `idna.encode()` function could consume significant resources. This may lead to a denial-of-service.\n\n### Patches\nThe function has been refined to reject such strings without the associated resource consumption in version 3.7.\n\n### Workarounds\nDomain names cannot exceed 253 characters in length, if this length limit is enforced prior to passing the domain to the `idna.encode()` function it should no longer consume significant resources. This is triggered by arbitrarily large inputs that would not occur in normal usage, but may be passed to the library assuming there is no preliminary input validation by the higher-level application.\n\n### References\n* https://huntr.com/bounties/93d78d07-d791-4b39-a845-cbfabc44aadb",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-jjg7-2v4v-x38h",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-3651",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/kjd/idna/security/advisories/GHSA-jjg7-2v4v-x38h"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-3651"
+        },
+        {
+          "url": "https://github.com/kjd/idna/commit/1d365e17e10d72d0b7876316fc7b9ca0eebdd38d"
+        },
+        {
+          "url": "https://huntr.com/bounties/93d78d07-d791-4b39-a845-cbfabc44aadb"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/idna/PYSEC-2024-60.yaml"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-jjg7-2v4v-x38h"
+        }
+      ],
+      "published_at": "2024-04-11T21:32:40Z",
+      "updated_at": "2024-07-31T05:03:14Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "idna"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "< 3.7",
+          "first_patched_version": {
+            "identifier": "3.7"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+        "score": 6.2
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-400",
+          "name": "Uncontrolled Resource Consumption"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "idna"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "< 3.7",
+      "first_patched_version": {
+        "identifier": "3.7"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/9",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/9",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 8,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-2mqj-m65w-jghx",
+      "cve_id": "CVE-2024-22190",
+      "summary": "Untrusted search path under some conditions on Windows allows arbitrary code execution",
+      "description": "### Summary\n\nThis issue exists because of an incomplete fix for CVE-2023-40590. On Windows, GitPython uses an untrusted search path if it uses a shell to run `git`, as well as when it runs `bash.exe` to interpret hooks. If either of those features are used on Windows, a malicious `git.exe` or `bash.exe` may be run from an untrusted repository.\n\n### Details\n\nAlthough GitPython often avoids executing programs found in an untrusted search path since 3.1.33, two situations remain where this still occurs. Either can allow arbitrary code execution under some circumstances.\n\n#### When a shell is used\n\nGitPython can be told to run `git` commands through a shell rather than as direct subprocesses, by passing `shell=True` to any method that accepts it, or by both setting `Git.USE_SHELL = True` and not passing `shell=False`. Then the Windows `cmd.exe` shell process performs the path search, and GitPython does not prevent that shell from finding and running `git` in the current directory.\n\nWhen GitPython runs `git` directly rather than through a shell, the GitPython process performs the path search, and currently omits the current directory by setting `NoDefaultCurrentDirectoryInExePath` in its own environment during the `Popen` call. Although the `cmd.exe` shell will honor this environment variable when present, GitPython does not currently pass it into the shell subprocess's environment.\n\nFurthermore, because GitPython sets the subprocess CWD to the root of a repository's working tree, using a shell will run a malicious `git.exe` in an untrusted repository even if GitPython itself is run from a trusted location.\n\nThis also applies if `Git.execute` is called directly with `shell=True` (or after `Git.USE_SHELL = True`) to run any command.\n\n#### When hook scripts are run\n\nOn Windows, GitPython uses `bash.exe` to run hooks that appear to be scripts. However, unlike when running `git`, no steps are taken to avoid finding and running `bash.exe` in the current directory.\n\nThis allows the author of an untrusted fork or branch to cause a malicious `bash.exe` to be run in some otherwise safe workflows. An example of such a scenario is if the user installs a trusted hook while on a trusted branch, then switches to an untrusted feature branch (possibly from a fork) to review proposed changes. If the untrusted feature branch contains a malicious `bash.exe` and the user's current working directory is the working tree, and the user performs an action that runs the hook, then although the hook itself is uncorrupted, it runs with the malicious `bash.exe`.\n\nNote that, while `bash.exe` is a shell, this is a separate scenario from when `git` is run using the unrelated Windows `cmd.exe` shell.\n\n### PoC\n\nOn Windows, create a `git.exe` file in a repository. Then create a `Repo` object, and call any method through it (directly or indirectly) that supports the `shell` keyword argument with `shell=True`:\n\n```powershell\nmkdir testrepo\ngit init testrepo\ncp ... testrepo git.exe # Replace \"...\" with any executable of choice.\npython -c \"import git; print(git.Repo('testrepo').git.version(shell=True))\"\n```\n\nThe `git.exe` executable in the repository directory will be run.\n\nOr use no `Repo` object, but do it from the location with the `git.exe`:\n\n```powershell\ncd testrepo\npython -c \"import git; print(git.Git().version(shell=True))\"\n```\n\nThe `git.exe` executable in the current directory will be run.\n\nFor the scenario with hooks, install a hook in a repository, create a `bash.exe` file in the current directory, and perform an operation that causes GitPython to attempt to run the hook:\n\n```powershell\nmkdir testrepo\ncd testrepo\ngit init\nmv .git/hooks/pre-commit.sample .git/hooks/pre-commit\ncp ... bash.exe # Replace \"...\" with any executable of choice.\necho \"Some text\" >file.txt\ngit add file.txt\npython -c \"import git; git.Repo().index.commit('Some message')\"\n```\n\nThe `bash.exe` executable in the current directory will be run.\n\n### Impact\n\nThe greatest impact is probably in applications that set `Git.USE_SHELL = True` for historical reasons. (Undesired console windows had, in the past, been created in some kinds of applications, when it was not used.) Such an application may be vulnerable to arbitrary code execution from a malicious repository, even with no other exacerbating conditions. This is to say that, if a shell is used to run `git`, the full effect of CVE-2023-40590 is still present. Furthermore, as noted above, running the application itself from a trusted directory is not a sufficient mitigation.\n\nAn application that does not direct GitPython to use a shell to run `git` subprocesses thus avoids most of the risk. However, there is no such straightforward way to prevent GitPython from running `bash.exe` to interpret hooks. So while the conditions needed for that to be exploited are more involved, it may be harder to mitigate decisively prior to patching.\n\n### Possible solutions\n\nA straightforward approach would be to address each bug directly:\n\n- When a shell is used, pass `NoDefaultCurrentDirectoryInExePath` into the subprocess environment, because in that scenario the subprocess is the `cmd.exe` shell that itself performs the path search.\n- Set `NoDefaultCurrentDirectoryInExePath` in the GitPython process environment during the `Popen` call made to run hooks with a `bash.exe` subprocess.\n\nThese need only be done on Windows.",
+      "severity": "high",
+      "identifiers": [
+        {
+          "value": "GHSA-2mqj-m65w-jghx",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2024-22190",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-2mqj-m65w-jghx"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/pull/1792"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/commit/ef3192cc414f2fd9978908454f6fd95243784c7f"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2024-22190"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/gitpython/PYSEC-2024-4.yaml"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-2mqj-m65w-jghx"
+        }
+      ],
+      "published_at": "2024-01-10T15:46:00Z",
+      "updated_at": "2024-01-19T16:24:51Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "GitPython"
+          },
+          "severity": "high",
+          "vulnerable_version_range": "< 3.1.41",
+          "first_patched_version": {
+            "identifier": "3.1.41"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-426",
+          "name": "Untrusted Search Path"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "severity": "high",
+      "vulnerable_version_range": "< 3.1.41",
+      "first_patched_version": {
+        "identifier": "3.1.41"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/8",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/8",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 7,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-g4mx-q9vg-27p4",
+      "cve_id": "CVE-2023-45803",
+      "summary": "urllib3's request body not stripped after redirect from 303 status changes request method to GET",
+      "description": "urllib3 previously wouldn't remove the HTTP request body when an HTTP redirect response using status 303 \"See Other\" after the request had its method changed from one that could accept a request body (like `POST`) to `GET` as is required by HTTP RFCs. Although the behavior of removing the request body is not specified in the section for redirects, it can be inferred by piecing together information from different sections and we have observed the behavior in other major HTTP client implementations like curl and web browsers.\n\nFrom [RFC 9110 Section 9.3.1](https://www.rfc-editor.org/rfc/rfc9110.html#name-get):\n\n> A client SHOULD NOT generate content in a GET request unless it is made directly to an origin server that has previously indicated, in or out of band, that such a request has a purpose and will be adequately supported.\n\n## Affected usages\n\nBecause the vulnerability requires a previously trusted service to become compromised in order to have an impact on confidentiality we believe the exploitability of this vulnerability is low. Additionally, many users aren't putting sensitive data in HTTP request bodies, if this is the case then this vulnerability isn't exploitable.\n\nBoth of the following conditions must be true to be affected by this vulnerability:\n\n* If you're using urllib3 and submitting sensitive information in the HTTP request body (such as form data or JSON)\n* The origin service is compromised and starts redirecting using 303 to a malicious peer or the redirected-to service becomes compromised.\n\n## Remediation\n\nYou can remediate this vulnerability with any of the following steps:\n\n* Upgrade to a patched version of urllib3 (v1.26.18 or v2.0.7)\n* Disable redirects for services that you aren't expecting to respond with redirects with `redirects=False`.\n* Disable automatic redirects with `redirects=False` and handle 303 redirects manually by stripping the HTTP request body.\n",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-g4mx-q9vg-27p4",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-45803",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-g4mx-q9vg-27p4"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/4e50fbc5db74e32cabd5ccc1ab81fc103adfe0b3"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/b594c5ceaca38e1ac215f916538fb128e3526a36"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/releases/tag/1.26.18"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/releases/tag/2.0.7"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-45803"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/4e98d57809dacab1cbe625fddeec1a290c478ea9"
+        },
+        {
+          "url": "https://www.rfc-editor.org/rfc/rfc9110.html#name-get"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PPDPLM6UUMN55ESPQWJFLLIZY4ZKCNRX/"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/urllib3/PYSEC-2023-212.yaml"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4R2Y5XK3WALSR3FNAGN7JBYV2B343ZKB/"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5F5CUBAN5XMEBVBZPHFITBLMJV5FIJJ5/"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-g4mx-q9vg-27p4"
+        }
+      ],
+      "published_at": "2023-10-17T20:15:25Z",
+      "updated_at": "2023-11-06T16:24:46Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": ">= 2.0.0, < 2.0.7",
+          "first_patched_version": {
+            "identifier": "2.0.7"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": ">= 0, < 1.26.18",
+          "first_patched_version": {
+            "identifier": "1.26.18"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:A/AC:H/PR:H/UI:N/S:U/C:H/I:N/A:N",
+        "score": 4.2
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-200",
+          "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": ">= 0, < 1.26.18",
+      "first_patched_version": {
+        "identifier": "1.26.18"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/7",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/7",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 6,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-cwvm-v4w8-q58c",
+      "cve_id": "CVE-2023-41040",
+      "summary": "Blind local file inclusion",
+      "description": "### Summary\n\nIn order to resolve some git references, GitPython reads files from the `.git` directory, in some places the name of the file being read is provided by the user, GitPython doesn't check if this file is located outside the `.git` directory. This allows an attacker to make GitPython read any file from the system.\n\n### Details\n\nThis vulnerability is present in\n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/refs/symbolic.py#L174-L175\n\nThat code joins the base directory with a user given string without checking if the final path is located outside the base directory.\n\nI was able to exploit it from three places, but there may be more code paths that lead to it:\n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/repo/base.py#L605\n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/repo/base.py#L620\n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/index/base.py#L1353\n\n### PoC\n\nRunning GitPython within any repo should work, here is an example with the GitPython repo.\n\n```python\nimport git\n\nr = git.Repo(\".\")\n\n# This will make GitPython read the README.md file from the root of the repo\nr.commit(\"../README.md\")\nr.tree(\"../README.md\")\nr.index.diff(\"../README.md\")\n\n# Reading /etc/random\n# WARNING: this will probably halt your system, run with caution\n# r.commit(\"../../../../../../../../../dev/random\")\n```\n\n### Impact\n\nI wasn't able to show the contents of the files (that's why \"blind\" local file inclusion), depending on how GitPython is being used, this can be used by an attacker for something _inoffensive_ as checking if a file exits, or cause a DoS by making GitPython read a big/infinite file (like `/dev/random` on Linux systems).\n\n### Possible solutions\n\nA solution would be to check that the final path isn't located outside the `repodir` path (maybe even after resolving symlinks). Maybe there could be other checks in place to make sure that the reference names are valid.\n\n---\n\n> [!NOTE]\n> This vulnerability was reported via email, and it was decided to publish it here and make it public, so the community is aware of it, and a fix can be provided.",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-cwvm-v4w8-q58c",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-41040",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-cwvm-v4w8-q58c"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-41040"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/refs/symbolic.py#L174-L175"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/commit/74e55ee4544867e1bd976b7df5a45869ee397b0b"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/gitpython/PYSEC-2023-165.yaml"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/pull/1672"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/releases/tag/3.1.37"
+        },
+        {
+          "url": "https://lists.debian.org/debian-lts-announce/2023/09/msg00036.html"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-cwvm-v4w8-q58c"
+        }
+      ],
+      "published_at": "2023-08-30T20:09:36Z",
+      "updated_at": "2023-11-05T05:04:43Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "GitPython"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "<= 3.1.36",
+          "first_patched_version": {
+            "identifier": "3.1.37"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+        "score": 4.0
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-22",
+          "name": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal')"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "<= 3.1.36",
+      "first_patched_version": {
+        "identifier": "3.1.37"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/6",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/6",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 5,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-v845-jxx5-vc9f",
+      "cve_id": "CVE-2023-43804",
+      "summary": "`Cookie` HTTP header isn't stripped on cross-origin redirects",
+      "description": "urllib3 doesn't treat the `Cookie` HTTP header special or provide any helpers for managing cookies over HTTP, that is the responsibility of the user. However, it is possible for a user to specify a `Cookie` header and unknowingly leak information via HTTP redirects to a different origin if that user doesn't disable redirects explicitly.\n\nUsers **must** handle redirects themselves instead of relying on urllib3's automatic redirects to achieve safe processing of the `Cookie` header, thus we decided to strip the header by default in order to further protect users who aren't using the correct approach.\n\n## Affected usages\n\nWe believe the number of usages affected by this advisory is low. It requires all of the following to be true to be exploited:\n\n* Using an affected version of urllib3 (patched in v1.26.17 and v2.0.6)\n* Using the `Cookie` header on requests, which is mostly typical for impersonating a browser.\n* Not disabling HTTP redirects\n* Either not using HTTPS or for the origin server to redirect to a malicious origin.\n\n## Remediation\n\n* Upgrading to at least urllib3 v1.26.17 or v2.0.6\n* Disabling HTTP redirects using `redirects=False` when sending requests.\n* Not using the `Cookie` header.",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-v845-jxx5-vc9f",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-43804",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/urllib3/urllib3/security/advisories/GHSA-v845-jxx5-vc9f"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/01220354d389cd05474713f8c982d05c9b17aafb"
+        },
+        {
+          "url": "https://github.com/urllib3/urllib3/commit/644124ecd0b6e417c527191f866daa05a5a2056d"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-43804"
+        },
+        {
+          "url": "https://lists.debian.org/debian-lts-announce/2023/10/msg00012.html"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/urllib3/PYSEC-2023-192.yaml"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/I3PR7C6RJ6JUBQKIJ644DMIJSUP36VDY/"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/NDAGZXYJ7H2G3SB47M453VQVNAWKAEJJ/"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5F5CUBAN5XMEBVBZPHFITBLMJV5FIJJ5/"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-v845-jxx5-vc9f"
+        }
+      ],
+      "published_at": "2023-10-02T23:27:05Z",
+      "updated_at": "2023-11-04T00:30:22Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": ">= 2.0.0, < 2.0.6",
+          "first_patched_version": {
+            "identifier": "2.0.6"
+          }
+        },
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "urllib3"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": "< 1.26.17",
+          "first_patched_version": {
+            "identifier": "1.26.17"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:N",
+        "score": 5.9
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-200",
+          "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "urllib3"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": "< 1.26.17",
+      "first_patched_version": {
+        "identifier": "1.26.17"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/5",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/5",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 4,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "gitpython"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-wfm5-v35h-vwf4",
+      "cve_id": "CVE-2023-40590",
+      "summary": "GitPython untrusted search path on Windows systems leading to arbitrary code execution",
+      "description": "### Summary\n\nWhen resolving a program, Python/Windows look for the current working directory, and after that the PATH environment (see big warning in https://docs.python.org/3/library/subprocess.html#popen-constructor). GitPython defaults to use the `git` command, if a user runs GitPython from a repo has a `git.exe` or `git` executable, that program will be run instead of the one in the user's `PATH`.\n\n### Details\n\nThis is more of a problem on how Python interacts with Windows systems, Linux and any other OS aren't affected by this. But probably people using GitPython usually run it from the CWD of a repo.\n\nThe execution of the `git` command happens in\n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/cmd.py#L277 \n\nhttps://github.com/gitpython-developers/GitPython/blob/1c8310d7cae144f74a671cbe17e51f63a830adbf/git/cmd.py#L983-L996\n\nAnd there are other commands executed that should probably be aware of this problem.\n\n### PoC\n\nOn a Windows system, create a `git.exe` or `git` executable in any directory, and import or run GitPython from that directory\n\n```\npython -c \"import git\"\n```\n\nThe git executable from the current directory will be run.\n\n### Impact\n\nAn attacker can trick a user to download a repository with a malicious `git` executable, if the user runs/imports GitPython from that directory, it allows the attacker to run any arbitrary commands.\n\n### Possible solutions\n \n- Default to an absolute path for the git program on Windows, like `C:\\\\Program Files\\\\Git\\\\cmd\\\\git.EXE` (default git path installation).\n- Require users to set the `GIT_PYTHON_GIT_EXECUTABLE` environment variable on Windows systems.\n- Make this problem prominent in the documentation and advise users to never run GitPython from an untrusted repo, or set the `GIT_PYTHON_GIT_EXECUTABLE` env var to an absolute path.\n- Resolve the executable manually by only looking into the `PATH` environment variable (suggested by @Byron)\n\n---\n\n> [!NOTE]\n> This vulnerability was reported via email, and it was decided to publish it here and make it public, so the community is aware of it, and a fix can be provided.",
+      "severity": "high",
+      "identifiers": [
+        {
+          "value": "GHSA-wfm5-v35h-vwf4",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-40590",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/security/advisories/GHSA-wfm5-v35h-vwf4"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-40590"
+        },
+        {
+          "url": "https://docs.python.org/3/library/subprocess.html#popen-constructor"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/issues/1635"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/pull/1636"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/commit/8b75434e2c8a082cdeb4971cc6f0ee2bafec45bc"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/releases/tag/3.1.33"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/gitpython/PYSEC-2023-161.yaml"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-wfm5-v35h-vwf4"
+        }
+      ],
+      "published_at": "2023-08-29T23:33:53Z",
+      "updated_at": "2023-11-05T05:04:10Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "gitpython"
+          },
+          "severity": "high",
+          "vulnerable_version_range": "<= 3.1.32",
+          "first_patched_version": {
+            "identifier": "3.1.33"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+        "score": 7.8
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-426",
+          "name": "Untrusted Search Path"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "gitpython"
+      },
+      "severity": "high",
+      "vulnerable_version_range": "<= 3.1.32",
+      "first_patched_version": {
+        "identifier": "3.1.33"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/4",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/4",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 3,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "certifi"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-xqr8-7jwr-rhp7",
+      "cve_id": "CVE-2023-37920",
+      "summary": "Removal of e-Tugra root certificate",
+      "description": "Certifi 2023.07.22 removes root certificates from \"e-Tugra\" from the root store. These are in the process of being removed from Mozilla's trust store.\n\n e-Tugra's root certificates are being removed pursuant to an investigation prompted by reporting of security issues in their systems. Conclusions of Mozilla's investigation can be found [here](https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/C-HrP1SEq1A).",
+      "severity": "high",
+      "identifiers": [
+        {
+          "value": "GHSA-xqr8-7jwr-rhp7",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-37920",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/certifi/python-certifi/security/advisories/GHSA-xqr8-7jwr-rhp7"
+        },
+        {
+          "url": "https://github.com/certifi/python-certifi/commit/8fb96ed81f71e7097ed11bc4d9b19afd7ea5c909"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-37920"
+        },
+        {
+          "url": "https://groups.google.com/a/mozilla.org/g/dev-security-policy/c/C-HrP1SEq1A"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/certifi/PYSEC-2023-135.yaml"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/5EX6NG7WUFNUKGFHLM35KHHU3GAKXRTG/"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-xqr8-7jwr-rhp7"
+        }
+      ],
+      "published_at": "2023-07-25T14:43:53Z",
+      "updated_at": "2023-11-09T05:05:47Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "certifi"
+          },
+          "severity": "high",
+          "vulnerable_version_range": ">= 2015.4.28, < 2023.7.22",
+          "first_patched_version": {
+            "identifier": "2023.7.22"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+        "score": 7.5
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-345",
+          "name": "Insufficient Verification of Data Authenticity"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "certifi"
+      },
+      "severity": "high",
+      "vulnerable_version_range": ">= 2015.4.28, < 2023.7.22",
+      "first_patched_version": {
+        "identifier": "2023.7.22"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/3",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/3",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 2,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-pr76-5cm5-w9cj",
+      "cve_id": "CVE-2023-40267",
+      "summary": "GitPython vulnerable to remote code execution due to insufficient sanitization of input arguments",
+      "description": "GitPython before 3.1.32 does not block insecure non-multi options in `clone` and `clone_from`, making it vulnerable to Remote Code Execution (RCE) due to improper user input validation, which makes it possible to inject a maliciously crafted remote URL into the clone command. Exploiting this vulnerability is possible because the library makes external calls to git without sufficient sanitization of input arguments. NOTE: this issue exists because of an incomplete fix for CVE-2022-24439.",
+      "severity": "critical",
+      "identifiers": [
+        {
+          "value": "GHSA-pr76-5cm5-w9cj",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-40267",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-40267"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/pull/1609"
+        },
+        {
+          "url": "https://github.com/gitpython-developers/GitPython/commit/ca965ecc81853bca7675261729143f54e5bf4cdd"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/gitpython/PYSEC-2023-137.yaml"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/PF6AXUTC5BO7L2SBJMCVKJSPKWY52I5R/"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AV5DV7GBLMOZT7U3Q4TDOJO5R6G3V6GH/"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-pr76-5cm5-w9cj"
+        }
+      ],
+      "published_at": "2023-08-11T09:30:36Z",
+      "updated_at": "2023-11-10T05:03:24Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "GitPython"
+          },
+          "severity": "critical",
+          "vulnerable_version_range": "< 3.1.32",
+          "first_patched_version": {
+            "identifier": "3.1.32"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+        "score": 9.8
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-78",
+          "name": "Improper Neutralization of Special Elements used in an OS Command ('OS Command Injection')"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "GitPython"
+      },
+      "severity": "critical",
+      "vulnerable_version_range": "< 3.1.32",
+      "first_patched_version": {
+        "identifier": "3.1.32"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/2",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/2",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  },
+  {
+    "number": 1,
+    "state": "open",
+    "dependency": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "requests"
+      },
+      "manifest_path": "requirements.txt",
+      "scope": "runtime"
+    },
+    "security_advisory": {
+      "ghsa_id": "GHSA-j8r2-6x86-q33q",
+      "cve_id": "CVE-2023-32681",
+      "summary": "Unintended leak of Proxy-Authorization header in requests",
+      "description": "### Impact\n\nSince Requests v2.3.0, Requests has been vulnerable to potentially leaking `Proxy-Authorization` headers to destination servers, specifically during redirects to an HTTPS origin. This is a product of how `rebuild_proxies` is used to recompute and [reattach the `Proxy-Authorization` header](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/sessions.py#L319-L328) to requests when redirected. Note this behavior has _only_ been observed to affect proxied requests when credentials are supplied in the URL user information component (e.g. `https://username:password@proxy:8080`).\n\n**Current vulnerable behavior(s):**\n\n1. HTTP → HTTPS: **leak**\n2. HTTPS → HTTP: **no leak**\n3. HTTPS → HTTPS: **leak**\n4. HTTP → HTTP: **no leak**\n\nFor HTTP connections sent through the proxy, the proxy will identify the header in the request itself and remove it prior to forwarding to the destination server. However when sent over HTTPS, the `Proxy-Authorization` header must be sent in the CONNECT request as the proxy has no visibility into further tunneled requests. This results in Requests forwarding the header to the destination server unintentionally, allowing a malicious actor to potentially exfiltrate those credentials.\n\nThe reason this currently works for HTTPS connections in Requests is the `Proxy-Authorization` header is also handled by urllib3 with our usage of the ProxyManager in adapters.py with [`proxy_manager_for`](https://github.com/psf/requests/blob/f2629e9e3c7ce3c3c8c025bcd8db551101cbc773/requests/adapters.py#L199-L235). This will compute the required proxy headers in `proxy_headers` and pass them to the Proxy Manager, avoiding attaching them directly to the Request object. This will be our preferred option going forward for default usage.\n\n### Patches\nStarting in Requests v2.31.0, Requests will no longer attach this header to redirects with an HTTPS destination. This should have no negative impacts on the default behavior of the library as the proxy credentials are already properly being handled by urllib3's ProxyManager.\n\nFor users with custom adapters, this _may_ be potentially breaking if you were already working around this behavior. The previous functionality of `rebuild_proxies` doesn't make sense in any case, so we would encourage any users impacted to migrate any handling of Proxy-Authorization directly into their custom adapter.\n\n### Workarounds\nFor users who are not able to update Requests immediately, there is one potential workaround.\n\nYou may disable redirects by setting `allow_redirects` to `False` on all calls through Requests top-level APIs. Note that if you're currently relying on redirect behaviors, you will need to capture the 3xx response codes and ensure a new request is made to the redirect destination.\n```\nimport requests\nr = requests.get('http://github.com/', allow_redirects=False)\n```\n\n### Credits\n\nThis vulnerability was discovered and disclosed by the following individuals.\n\nDennis Brinkrolf, Haxolot (https://haxolot.com/)\nTobias Funke, (tobiasfunke93@gmail.com)",
+      "severity": "medium",
+      "identifiers": [
+        {
+          "value": "GHSA-j8r2-6x86-q33q",
+          "type": "GHSA"
+        },
+        {
+          "value": "CVE-2023-32681",
+          "type": "CVE"
+        }
+      ],
+      "references": [
+        {
+          "url": "https://github.com/psf/requests/security/advisories/GHSA-j8r2-6x86-q33q"
+        },
+        {
+          "url": "https://github.com/psf/requests/commit/74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5"
+        },
+        {
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2023-32681"
+        },
+        {
+          "url": "https://github.com/psf/requests/releases/tag/v2.31.0"
+        },
+        {
+          "url": "https://github.com/pypa/advisory-database/tree/main/vulns/requests/PYSEC-2023-74.yaml"
+        },
+        {
+          "url": "https://lists.debian.org/debian-lts-announce/2023/06/msg00018.html"
+        },
+        {
+          "url": "https://security.gentoo.org/glsa/202309-08"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/AW7HNFGYP44RT3DUDQXG2QT3OEV2PJ7Y"
+        },
+        {
+          "url": "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/KOYASTZDGQG2BWLSNBPL3TQRL2G7QYNZ"
+        },
+        {
+          "url": "https://github.com/advisories/GHSA-j8r2-6x86-q33q"
+        }
+      ],
+      "published_at": "2023-05-22T20:36:32Z",
+      "updated_at": "2024-03-27T20:09:55Z",
+      "withdrawn_at": null,
+      "vulnerabilities": [
+        {
+          "package": {
+            "ecosystem": "pip",
+            "name": "requests"
+          },
+          "severity": "medium",
+          "vulnerable_version_range": ">= 2.3.0, < 2.31.0",
+          "first_patched_version": {
+            "identifier": "2.31.0"
+          }
+        }
+      ],
+      "cvss": {
+        "vector_string": "CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:C/C:H/I:N/A:N",
+        "score": 6.1
+      },
+      "cwes": [
+        {
+          "cwe_id": "CWE-200",
+          "name": "Exposure of Sensitive Information to an Unauthorized Actor"
+        }
+      ]
+    },
+    "security_vulnerability": {
+      "package": {
+        "ecosystem": "pip",
+        "name": "requests"
+      },
+      "severity": "medium",
+      "vulnerable_version_range": ">= 2.3.0, < 2.31.0",
+      "first_patched_version": {
+        "identifier": "2.31.0"
+      }
+    },
+    "url": "https://api.github.com/repos/dan-amzulescu-port/CF-DevBot/dependabot/alerts/1",
+    "html_url": "https://github.com/dan-amzulescu-port/CF-DevBot/security/dependabot/1",
+    "created_at": "2024-08-22T18:16:55Z",
+    "updated_at": "2024-08-22T18:16:55Z",
+    "dismissed_at": null,
+    "dismissed_by": null,
+    "dismissed_reason": null,
+    "dismissed_comment": null,
+    "fixed_at": null,
+    "auto_dismissed_at": null
+  }
+]
