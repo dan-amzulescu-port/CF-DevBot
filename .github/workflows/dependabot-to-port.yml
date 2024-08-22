@@ -21,16 +21,6 @@ jobs:
       - name: Print JSON Data (Debug Step)
         run: cat dependabot/dependabot-output.json
 
-      - name: Commit dependabot-output.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
-          git add dependabot/dependabot-output.json
-          git commit -m "Add dependabot-output.json"
-          git push origin main  # Change 'main' if your default branch is different
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
