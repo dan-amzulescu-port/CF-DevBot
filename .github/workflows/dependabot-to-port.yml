@@ -27,11 +27,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Process Dependabot Data
-        run: python3 process_dependabot.py
+        run: python3 scripts/process_dependabot.py
         env:
           PORT_API_KEY: ${{ secrets.PORT_JWT_TOKEN }}
 
       - name: Upload Processed Data to Port
-        run: python3 upload_to_port.py
+        run: python3 scripts/upload_to_port.py
         env:
           PORT_API_KEY: ${{ secrets.PORT_JWT_TOKEN }}
