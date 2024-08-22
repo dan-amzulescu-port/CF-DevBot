@@ -18,8 +18,8 @@ jobs:
           -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
           -o dependabot/dependabot-output.json        
 
-          echo "Dependabot data fetched:"
-          cat dependabot/dependabot-output.json
+      - name: Print JSON Data (Debug Step)
+        run: cat dependabot/dependabot-output.json
 
       - name: Set up Python
         uses: actions/setup-python@v4
