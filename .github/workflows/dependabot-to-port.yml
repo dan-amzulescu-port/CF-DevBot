@@ -23,12 +23,12 @@ jobs:
 
       - name: Run Dependabot processing script
         run: |
-          python process_dependabot.py
+          python scripts/process_dependabot.py
         env:
           PORT_API_KEY: ${{ secrets.PORT_JWT_TOKEN }}
 
       - name: Upload data to Port
         run: |
-          python upload_to_port.py
+          python scripts/upload_to_port.py
         env:
           PORT_API_KEY: ${{ secrets.PORT_JWT_TOKEN }}
