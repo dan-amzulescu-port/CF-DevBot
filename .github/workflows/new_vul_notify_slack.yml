@@ -1,0 +1,20 @@
+name: Notify when new vulnerability was found
+
+on:
+  workflow_dispatch:
+    inputs:
+      # Note that the input is the same as the payload (workflowInputs) defined in the automation
+      vul_name:
+        description: "The new vulnerability"
+        required: true
+        type: string
+
+jobs:
+  send_message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"a new vulnerability -> ${{ inputs.service_name }} was found."}' $SLACK_WEBHOOK_URL
