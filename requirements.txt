@@ -26,4 +26,4 @@ python-dotenv~=1.0.0
 
 setuptools~=67.6.1
 bs4~=0.0.1
-beautifulsoup4~=4.12.2
+beautifulsoup4~=4.12.3
